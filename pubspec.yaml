@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^8.0.2
 
 dev_dependencies:
   flutter_test:
@@ -16,4 +17,15 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
 flutter:
-  uses-material-design: true
+  uses-material-design: true,
+  fonts:
+   -family: Axiforma
+    fonts: 
+     -asset: assets/fonts/Axiforma-Regular.ttf
+      weight: 400
+    fonts:
+      -asset: assets/fonts/Axiforma-Bold.ttf
+       weight: 700
+    fonts:
+      -asset: assets/fonts/Axiforma-Light.ttf
+       weight: 400
