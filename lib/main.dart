@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geoesplora/theme/app_theme.dart';
+import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/views/main_screen.dart';
 
 void main() {
@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Geositi Calabria',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme: ThemeData(
+        fontFamily: 'Axiforma',
+        scaffoldBackgroundColor: AppColors.background,
+      ),
 
       home: const MainScreen(),
     );
