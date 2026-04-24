@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/widgets/custom_bottom_nav.dart';
+import 'package:geoesplora/widgets/custom_search_bar.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -22,7 +22,17 @@ class MainScreen extends ConsumerWidget {
     ];
 
     return Scaffold(
-      body: pages[currentIndex],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: CustomSearchBar(),
+            ),
+            Expanded(child: pages[currentIndex]),
+          ],
+        ),
+      ),
       bottomNavigationBar: const CustomBottomNav(),
     );
   }
