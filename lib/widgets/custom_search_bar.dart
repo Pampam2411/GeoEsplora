@@ -78,8 +78,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   contentPadding: const EdgeInsets.only(
                     left: 20,
                     right: 8,
-                    bottom: 12,
-                    top: 12,
+                    bottom: 10,
+                    top: 10,
                   ),
 
                   suffixIcon: IconButton(
