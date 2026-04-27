@@ -23,6 +23,8 @@ class MainScreen extends ConsumerWidget {
                   'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop',
               placeholder: 'Petra',
               location: 'Cusé',
+              rating: 4.8,
+              reviewCount: 143,
             ),
             const Center(child: Text('Schermata Mappa - Esplorazione')),
             const Center(child: Text('Scheramata Fotocamera')),
