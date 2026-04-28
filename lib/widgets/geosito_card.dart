@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/widgets/favorite_button.dart';
 
 class GeositoCard extends StatelessWidget {
   final String imageUrl, placeholder, location;
@@ -26,7 +27,7 @@ class GeositoCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.white, width: 1),
-        color: Colors.grey,
+        color: AppColors.grey,
       ),
 
       child: ClipRRect(
@@ -39,7 +40,7 @@ class GeositoCard extends StatelessWidget {
               imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.image_not_supported, color: Colors.grey),
+                child: Icon(Icons.image_not_supported, color: AppColors.grey),
               ),
             ),
 
@@ -116,8 +117,8 @@ class GeositoCard extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(
-                                      Icons.star_border,
+                                    const FaIcon(
+                                      FontAwesomeIcons.star,
                                       color: AppColors.white,
                                       size: 12,
                                     ),
@@ -153,26 +154,7 @@ class GeositoCard extends StatelessWidget {
                   //PULSANTE PREFERITO
                   Align(
                     alignment: Alignment.topRight,
-                    child: Container(
-                      width: 32.8,
-                      height: 32.8,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.background,
-                      ),
-
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          debugPrint('premuto pulsante favorito <3');
-                        },
-                        icon: const Icon(
-                          Icons.favorite_border,
-                          color: AppColors.secondary,
-                          size: 20,
-                        ),
-                      ),
-                    ),
+                    child: FavoriteButton(isInitiallyFavorite: false, size: 36),
                   ),
                 ],
               ),
