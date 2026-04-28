@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geoesplora/widgets/rock_card.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/widgets/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/custom_search_bar.dart';
@@ -21,10 +22,16 @@ class MainScreen extends ConsumerWidget {
               // Mettiamo un'immagine segnaposto a caso da internet per testare il layout
               imageUrl:
                   'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop',
-              placeholder: 'Petra',
-              location: 'Cusé',
+              placeholder: 'Placeholder',
+              location: 'Cosenza',
               rating: 4.8,
               reviewCount: 143,
+            ),
+            RockCard(
+              imageUrl:
+                  'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop',
+              rockName: 'Marmo',
+              type: 'Sedimentaria',
             ),
             const Center(child: Text('Schermata Mappa - Esplorazione')),
             const Center(child: Text('Scheramata Fotocamera')),
