@@ -3,13 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 
-class GeositoCard extends StatelessWidget {
+class GeositeCard extends StatelessWidget {
   final String imageUrl, placeholder, location;
   final bool isFavorite;
   final double rating;
   final int reviewCount;
 
-  const GeositoCard({
+  const GeositeCard({
     super.key,
     required this.imageUrl,
     required this.placeholder,
