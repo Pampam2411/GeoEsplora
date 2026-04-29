@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geoesplora/views/geosite_detail_screen.dart';
 import 'package:geoesplora/widgets/rock_card.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/widgets/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/custom_search_bar.dart';
-import 'package:geoesplora/widgets/geosito_card.dart';
+import 'package:geoesplora/widgets/geosite_card.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -14,12 +15,13 @@ class MainScreen extends ConsumerWidget {
     final currentIndex = ref.watch(bottomNavProvider);
 
     final List<Widget> pages = [
+      GeositoDetailScreen(),
+
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            GeositoCard(
-              // Mettiamo un'immagine segnaposto a caso da internet per testare il layout
+            GeositeCard(
               imageUrl:
                   'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop',
               placeholder: 'Placeholder',
