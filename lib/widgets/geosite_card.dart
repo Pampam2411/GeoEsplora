@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
+import 'package:geoesplora/widgets/review_badge.dart';
 
 class GeositeCard extends StatelessWidget {
   final String imageUrl, placeholder, location;
@@ -92,61 +93,18 @@ class GeositeCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        ReviewBadge(
+                          reviewCount: reviewCount,
+                          rating: rating,
+                          textColor: AppColors.white,
+                          onTap: () {
+                            debugPrint(
+                              'premuto recensioni per $placeholder dalla Card',
+                            );
+                          },
+                        ),
 
                         const SizedBox(height: 6),
-
-                        GestureDetector(
-                          onTap: () {
-                            debugPrint('premuto recensioni per $placeholder');
-                          },
-                          behavior: HitTestBehavior.opaque,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 2,
-                                ),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: AppColors.background,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const FaIcon(
-                                      FontAwesomeIcons.star,
-                                      color: AppColors.white,
-                                      size: 12,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      rating.toStringAsFixed(1),
-                                      style: const TextStyle(
-                                        color: AppColors.white,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-
-                              Text(
-                                '$reviewCount recensini',
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),

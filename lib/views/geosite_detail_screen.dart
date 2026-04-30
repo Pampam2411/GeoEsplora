@@ -5,6 +5,7 @@ import 'package:geoesplora/widgets/detaild_tab_bar.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 import 'package:geoesplora/widgets/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/geosite_quick_info.dart';
+import 'package:geoesplora/widgets/review_badge.dart';
 
 class GeositoDetailScreen extends StatefulWidget {
   const GeositoDetailScreen({super.key});
@@ -81,8 +82,8 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                       const SizedBox(height: 5),
                       Row(
                         children: [
-                          const Icon(
-                            Icons.location_on_outlined,
+                          const FaIcon(
+                            FontAwesomeIcons.locationDot,
                             color: Colors.white,
                             size: 16,
                           ),
@@ -175,17 +176,13 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
               ),
             ),
 
-            GestureDetector(
-              onTap: () => debugPrint("Apri recensione"),
-              child: const Text(
-                "143 recensioni",
-                style: TextStyle(
-                  color: AppColors.secondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
+            ReviewBadge(
+              reviewCount: 143,
+              textColor: AppColors.secondary,
+              isUnderlined: true,
+              onTap: () {
+                debugPrint("Apri modale recensioni dalla Pagina Dettaglio");
+              },
             ),
           ],
         ),
