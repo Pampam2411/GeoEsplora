@@ -52,7 +52,7 @@ class GeositeCard extends StatelessWidget {
                   colors: [
                     Colors.transparent,
                     Colors.black.withValues(alpha: 0.1),
-                    Colors.black.withValues(alpha: 0.8), // Scuro in basso
+                    Colors.black.withValues(alpha: 0.8),
                   ],
                   stops: const [0.0, 0.5, 1.0],
                 ),

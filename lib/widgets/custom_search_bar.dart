@@ -13,8 +13,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   bool _isExpanded = false;
 
   double _tempoDisponibile = 30;
-  double _budgetStimato = 20;
+  bool _budgetBasso = false; // €
+  bool _budgetMedio = false; // €€
+  bool _budgetAlto = false; // €€€
   final List<String> _distanzeSelezionate = [];
+
   double _lunghezzaPercorso = 15;
   bool _accessibilita = false;
   final List<String> _categorieSelezionate = [];
@@ -27,7 +30,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   void _eseguiRicerca() {
     debugPrint(
-      "Ricerca avviata con: Tempo $_tempoDisponibile, Budget: $_budgetStimato, Accessibilità: $_accessibilita",
+      "Ricerca avviata con: Tempo $_tempoDisponibile, budgetBasso= $_budgetBasso, budgetMedio=$_budgetMedio, budgetAlto=$_budgetAlto, Accessibilità: $_accessibilita",
     );
     _toggleFilters();
   }
@@ -119,7 +122,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget _buildFilterContent() {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 20),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -136,17 +138,25 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             onChanged: (val) => setState(() => _tempoDisponibile = val),
           ),
 
-          //SLIDER BUDGET
+          //BUDGET
           _buildSectionTitle('Budget stimato'),
-          Slider(
-            value: _budgetStimato,
-            max: 100,
-            divisions: 20,
-            activeColor: AppColors.secondary,
-            label: _budgetStimato >= 100
-                ? '100+'
-                : _budgetStimato.toInt().toString(),
-            onChanged: (val) => setState(() => _budgetStimato = val),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Row(
+              children: [
+                _buildBudgetCheckbox('€', _budgetBasso, (val) {
+                  setState(() => _budgetBasso = val ?? false);
+                }),
+                const SizedBox(width: 20),
+                _buildBudgetCheckbox('€€', _budgetMedio, (val) {
+                  setState(() => _budgetMedio = val ?? false);
+                }),
+                const SizedBox(width: 20),
+                _buildBudgetCheckbox('€€€', _budgetAlto, (val) {
+                  setState(() => _budgetAlto = val ?? false);
+                }),
+              ],
+            ),
           ),
 
           //DISTANZA/AREA GEOGRAFICA
@@ -273,6 +283,39 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           ],
         );
       }).toList(),
+    );
+  }
+
+  Widget _buildBudgetCheckbox(
+    String label,
+    bool isChecked,
+    ValueChanged<bool?> onChanged,
+  ) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 24,
+          height: 24,
+          child: Checkbox(
+            value: isChecked,
+            onChanged: onChanged,
+            activeColor: AppColors.secondary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+            color: AppColors.secondary,
+          ),
+        ),
+      ],
     );
   }
 }
