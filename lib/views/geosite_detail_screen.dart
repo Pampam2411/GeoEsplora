@@ -5,6 +5,7 @@ import 'package:geoesplora/widgets/detaild_tab_bar.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 import 'package:geoesplora/widgets/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/geosite_quick_info.dart';
+import 'package:geoesplora/widgets/primary_button.dart';
 import 'package:geoesplora/widgets/review_badge.dart';
 
 class GeositoDetailScreen extends StatefulWidget {
@@ -272,41 +273,7 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
 
         const SizedBox(height: 10),
         //PULSANTE PIANIFICA VISITA
-        SizedBox(
-          width: double.infinity,
-          height: 54,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.secondary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              elevation: 0,
-            ),
-            onPressed: () {
-              debugPrint("Vai alla schermata di pianificazione!");
-            },
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Pianifica visita",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 10),
-                FaIcon(
-                  FontAwesomeIcons.locationArrow,
-                  color: AppColors.white,
-                  size: 20,
-                ),
-              ],
-            ),
-          ),
-        ),
+        PrimaryButton(text: "Pianifica Visita", onPressed: _pulsantePianifica),
       ],
     );
   }
@@ -326,5 +293,9 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
         ),
       ],
     );
+  }
+
+  void _pulsantePianifica() {
+    debugPrint("Premuto pulsante pianifica visita");
   }
 }
