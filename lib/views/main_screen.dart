@@ -16,7 +16,6 @@ class MainScreen extends ConsumerWidget {
 
     final List<Widget> pages = [
       GeositoDetailScreen(),
-
       Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -36,6 +35,7 @@ class MainScreen extends ConsumerWidget {
               type: 'Sedimentaria',
             ),
             const Center(child: Text('Schermata Mappa - Esplorazione')),
+
             const Center(child: Text('Scheramata Fotocamera')),
             const Center(child: Text('Schermata Geositi - Lista completa')),
             const Center(
