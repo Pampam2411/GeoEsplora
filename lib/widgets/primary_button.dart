@@ -47,7 +47,7 @@ class PrimaryButton extends StatelessWidget {
             ),
             if (icon != null) ...[
               const SizedBox(width: 10),
-              FaIcon(icon, color: AppColors.white, size: 20),
+              FaIcon(icon, color: AppColors.surface, size: 20),
             ],
           ],
         ),

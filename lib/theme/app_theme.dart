@@ -11,7 +11,7 @@ class AppTheme {
         seedColor: AppColors.primary,
         primary: AppColors.primary,
         secondary: AppColors.secondary,
-        surface: AppColors.white,
+        surface: AppColors.surface,
         onSurface: AppColors.textPrimary,
         error: Colors.redAccent,
       ),
@@ -53,7 +53,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.secondary,
-          foregroundColor: AppColors.white,
+          foregroundColor: AppColors.surface,
           elevation: 0,
           textStyle: const TextStyle(
             fontFamily: 'Axiforma',
@@ -69,18 +69,18 @@ class AppTheme {
 
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.white,
+        fillColor: AppColors.surface,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 12,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.greyLight),
+          borderSide: const BorderSide(color: AppColors.borderLight),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.greyLight),
+          borderSide: const BorderSide(color: AppColors.borderLight),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -89,7 +89,7 @@ class AppTheme {
         hintStyle: const TextStyle(
           fontFamily: 'Axiforma',
           fontWeight: FontWeight.w400,
-          color: AppColors.greyLight,
+          color: AppColors.borderLight,
         ),
       ),
     );

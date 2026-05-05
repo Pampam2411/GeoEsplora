@@ -23,7 +23,7 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.surface,
       body: Stack(
         children: [
           Positioned(
@@ -273,7 +273,11 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
 
         const SizedBox(height: 10),
         //PULSANTE PIANIFICA VISITA
-        PrimaryButton(text: "Pianifica Visita", onPressed: _pulsantePianifica),
+        PrimaryButton(
+          text: "Pianifica Visita",
+          onPressed: _pulsantePianifica,
+          icon: FontAwesomeIcons.locationArrow,
+        ),
       ],
     );
   }
@@ -289,7 +293,14 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
         const SizedBox(height: 10),
         Text(
           "Qui andranno le ere geologiche, tipo di roccia,ecc...",
-          style: TextStyle(color: AppColors.grey),
+          style: TextStyle(color: AppColors.textSecondary),
+        ),
+        const SizedBox(height: 10),
+        //PULSANTE PIANIFICA VISITA
+        PrimaryButton(
+          text: "Pianifica Visita",
+          onPressed: _pulsantePianifica,
+          icon: FontAwesomeIcons.locationArrow,
         ),
       ],
     );

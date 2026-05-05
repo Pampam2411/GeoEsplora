@@ -21,8 +21,8 @@ class RockCard extends StatelessWidget {
       width: 114,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: AppColors.white, width: 1),
-        color: AppColors.grey,
+        border: Border.all(color: AppColors.surface, width: 1),
+        color: AppColors.textSecondary,
       ),
 
       child: ClipRRect(
@@ -73,7 +73,7 @@ class RockCard extends StatelessWidget {
                         Text(
                           rockName,
                           style: const TextStyle(
-                            color: AppColors.white,
+                            color: AppColors.surface,
                             fontSize: 11,
                             fontWeight: FontWeight.w400,
                           ),
@@ -81,7 +81,7 @@ class RockCard extends StatelessWidget {
                         Text(
                           type,
                           style: const TextStyle(
-                            color: AppColors.white,
+                            color: AppColors.surface,
                             fontSize: 7,
                             fontWeight: FontWeight.w300,
                           ),

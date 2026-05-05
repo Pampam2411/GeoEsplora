@@ -40,8 +40,8 @@ class CustomBottomNav extends ConsumerWidget {
       icon: FaIcon(
         icon,
         color: isSelected
-            ? AppColors.white
-            : AppColors.white.withValues(alpha: 0.5),
+            ? AppColors.surface
+            : AppColors.surface.withValues(alpha: 0.5),
         size: isSelected ? 24 : 22,
       ),
       onPressed: () => ref.read(bottomNavProvider.notifier).setIndex(index),

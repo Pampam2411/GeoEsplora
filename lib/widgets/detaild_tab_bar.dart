@@ -39,7 +39,7 @@ class DetailTabBar extends StatelessWidget {
                   style: TextStyle(
                     color: selectedIndex == 0
                         ? AppColors.textPrimary
-                        : AppColors.white,
+                        : AppColors.surface,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
@@ -69,7 +69,7 @@ class DetailTabBar extends StatelessWidget {
                   style: TextStyle(
                     color: selectedIndex == 1
                         ? AppColors.textPrimary
-                        : AppColors.white,
+                        : AppColors.surface,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),

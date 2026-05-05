@@ -26,8 +26,8 @@ class GeositeCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.white, width: 1),
-        color: AppColors.grey,
+        border: Border.all(color: AppColors.surface, width: 1),
+        color: AppColors.textSecondary,
       ),
 
       child: ClipRRect(
@@ -40,7 +40,10 @@ class GeositeCard extends StatelessWidget {
               imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.image_not_supported, color: AppColors.grey),
+                child: Icon(
+                  Icons.image_not_supported,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ),
 
@@ -87,7 +90,7 @@ class GeositeCard extends StatelessWidget {
                         Text(
                           placeholder,
                           style: TextStyle(
-                            color: AppColors.white,
+                            color: AppColors.surface,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -95,7 +98,7 @@ class GeositeCard extends StatelessWidget {
                         ReviewBadge(
                           reviewCount: reviewCount,
                           rating: rating,
-                          textColor: AppColors.white,
+                          textColor: AppColors.surface,
                           onTap: () {
                             debugPrint(
                               'premuto recensioni per $placeholder dalla Card',
