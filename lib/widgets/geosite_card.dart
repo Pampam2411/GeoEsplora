@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/views/geosite_detail_screen.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 import 'package:geoesplora/widgets/review_badge.dart';
 
@@ -16,14 +17,15 @@ class GeositeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 165,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.surface, width: 1),
-        color: AppColors.textSecondary,
-      ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GeositoDetailScreen(geosite: geosite),
+          ),
+        );
+      },
 
       child: ClipRRect(
         borderRadius: BorderRadius.circular(19),
