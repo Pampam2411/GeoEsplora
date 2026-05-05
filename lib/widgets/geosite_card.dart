@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 import 'package:geoesplora/widgets/review_badge.dart';
 
 class GeositeCard extends StatelessWidget {
-  final String imageUrl, placeholder, location;
+  final Geosite geosite;
   final bool isFavorite;
-  final double rating;
-  final int reviewCount;
 
   const GeositeCard({
     super.key,
-    required this.imageUrl,
-    required this.placeholder,
-    required this.location,
+    required this.geosite,
     this.isFavorite = false,
-    required this.rating,
-    required this.reviewCount,
   });
 
   @override
@@ -37,7 +32,7 @@ class GeositeCard extends StatelessWidget {
           children: [
             //IMMAGINE CARD
             Image.network(
-              imageUrl,
+              geosite.imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => const Center(
                 child: Icon(
@@ -79,7 +74,7 @@ class GeositeCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          location,
+                          geosite.location,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -88,7 +83,7 @@ class GeositeCard extends StatelessWidget {
                         ),
 
                         Text(
-                          placeholder,
+                          geosite.name,
                           style: TextStyle(
                             color: AppColors.surface,
                             fontSize: 22,
@@ -96,12 +91,12 @@ class GeositeCard extends StatelessWidget {
                           ),
                         ),
                         ReviewBadge(
-                          reviewCount: reviewCount,
-                          rating: rating,
+                          reviewCount: geosite.reviewCount,
+                          rating: geosite.rating,
                           textColor: AppColors.surface,
                           onTap: () {
                             debugPrint(
-                              'premuto recensioni per $placeholder dalla Card',
+                              'premuto recensioni per ${geosite.name} dalla Card',
                             );
                           },
                         ),

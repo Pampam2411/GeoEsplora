@@ -104,13 +104,7 @@ class _DashboardViewState extends State<DashboardView> {
                   return Container(
                     width: 280,
                     margin: const EdgeInsets.only(right: 16.0),
-                    child: GeositeCard(
-                      imageUrl: geosito.imageUrl,
-                      placeholder: geosito.name,
-                      location: geosito.location,
-                      rating: geosito.rating,
-                      reviewCount: geosito.reviewCount,
-                    ),
+                    child: GeositeCard(geosite: geosito),
                   );
                 },
               ),

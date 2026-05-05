@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 
 class RockCard extends StatelessWidget {
-  final String imageUrl, rockName, type;
+  final Rock rock;
   final bool isFavorite;
 
-  const RockCard({
-    super.key,
-    required this.imageUrl,
-    required this.rockName,
-    required this.type,
-    this.isFavorite = false,
-  });
+  const RockCard({super.key, required this.rock, this.isFavorite = false});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +26,7 @@ class RockCard extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image.network(
-              imageUrl,
+              rock.imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => const Center(
                 child: Icon(Icons.image_not_supported, color: Colors.grey),
@@ -54,16 +49,15 @@ class RockCard extends StatelessWidget {
             ),
 
             Padding(
-              // Questo padding spinge verso l'interno TUTTO ciò che c'è nello Stack sottostante
               padding: const EdgeInsets.only(
                 left: 15.0,
                 bottom: 16.0,
-                top: 12.0, // Regola questo per allontanare il cuore dal tetto
-                right: 12.0, // Regola questo per allontanare il cuore da destra
+                top: 12.0,
+                right: 12.0,
               ),
               child: Stack(
                 children: [
-                  // I TESTI (In basso a sinistra)
+                  //TESTI
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Column(
@@ -71,7 +65,7 @@ class RockCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          rockName,
+                          rock.name,
                           style: const TextStyle(
                             color: AppColors.surface,
                             fontSize: 11,
@@ -79,7 +73,7 @@ class RockCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          type,
+                          rock.type,
                           style: const TextStyle(
                             color: AppColors.surface,
                             fontSize: 7,

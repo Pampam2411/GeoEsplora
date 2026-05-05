@@ -25,12 +25,7 @@ class RockListView extends StatelessWidget {
         itemCount: rocks.length,
         itemBuilder: (context, index) {
           final rock = rocks[index];
-          return RockCard(
-            imageUrl: rock.imageUrl,
-            rockName: rock.name,
-            type: rock.type,
-            isFavorite: false,
-          );
+          return RockCard(rock: rock, isFavorite: false);
         },
       ),
     );

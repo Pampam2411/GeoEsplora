@@ -17,14 +17,7 @@ class HomeView extends StatelessWidget {
 
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
-          child: GeositeCard(
-            imageUrl: geosito.imageUrl,
-            placeholder: geosito.name,
-            location: geosito.location,
-            rating: geosito.rating,
-            reviewCount: geosito.reviewCount,
-            isFavorite: false,
-          ),
+          child: GeositeCard(geosite: geosito, isFavorite: false),
         );
       },
     );
