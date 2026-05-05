@@ -23,6 +23,10 @@ migrate_working_dir/
 # is commented out by default.
 #.vscode/
 
+# Ignora i file CMake generati per le build desktop
+**/windows/flutter/generated_plugins.cmake
+**/linux/flutter/generated_plugins.cmake
+
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
