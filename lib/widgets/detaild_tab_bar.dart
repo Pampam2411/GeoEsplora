@@ -15,7 +15,13 @@ class DetailTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      decoration: const BoxDecoration(color: AppColors.background),
+      decoration: const BoxDecoration(
+        color: AppColors.secondary,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: Row(
         children: [
           // DETTAGLI
@@ -30,7 +36,6 @@ class DetailTabBar extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(20),
                     topRight: Radius.circular(selectedIndex == 0 ? 20 : 0),
-                    bottomRight: Radius.circular(selectedIndex == 0 ? 0 : 20),
                   ),
                 ),
                 alignment: Alignment.center,
@@ -60,7 +65,6 @@ class DetailTabBar extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                     topRight: const Radius.circular(20),
                     topLeft: Radius.circular(selectedIndex == 1 ? 20 : 0),
-                    bottomLeft: Radius.circular(selectedIndex == 1 ? 0 : 20),
                   ),
                 ),
                 alignment: Alignment.center,
