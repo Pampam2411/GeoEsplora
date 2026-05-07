@@ -18,8 +18,9 @@ class DetailTabBar extends StatelessWidget {
       decoration: const BoxDecoration(
         color: AppColors.secondary,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(22),
+          topRight: Radius.circular(22),
+          bottomLeft: Radius.circular(22),
         ),
       ),
       child: Row(
@@ -34,7 +35,7 @@ class DetailTabBar extends StatelessWidget {
                       ? AppColors.background
                       : AppColors.secondary,
                   borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(20),
+                    topLeft: const Radius.circular(21),
                     topRight: Radius.circular(selectedIndex == 0 ? 20 : 0),
                   ),
                 ),
@@ -63,7 +64,7 @@ class DetailTabBar extends StatelessWidget {
                       ? AppColors.background
                       : AppColors.secondary,
                   borderRadius: BorderRadius.only(
-                    topRight: const Radius.circular(20),
+                    topRight: const Radius.circular(21),
                     topLeft: Radius.circular(selectedIndex == 1 ? 20 : 0),
                   ),
                 ),

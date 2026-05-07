@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geoesplora/views/dashboard_view.dart';
-import 'package:geoesplora/views/home_view.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/views/rock_list_view.dart';
 import 'package:geoesplora/widgets/custom_bottom_nav.dart';
-import 'package:geoesplora/widgets/custom_search_bar.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -16,9 +14,8 @@ class MainScreen extends ConsumerWidget {
 
     final List<Widget> pages = [
       const DashboardView(),
-      const HomeView(),
+      const Center(child: Text('Schermata Mappa')),
       const Center(child: Text('Schermata Fotocamera')),
-
       const RockListView(),
       const Center(child: Text('Schermata Profilo')),
     ];
@@ -29,7 +26,6 @@ class MainScreen extends ConsumerWidget {
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: CustomSearchBar(),
             ),
             Expanded(child: pages[currentIndex]),
           ],

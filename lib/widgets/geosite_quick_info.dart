@@ -17,7 +17,7 @@ class GeositeQuickInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 16.0,
+      spacing: 25.0,
       runSpacing: 10.0,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [

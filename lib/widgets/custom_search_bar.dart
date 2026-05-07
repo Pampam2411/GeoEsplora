@@ -74,15 +74,18 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Cerca geosito...',
-                  hintStyle: TextStyle(color: AppColors.secondary),
+                  hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.secondary,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   contentPadding: const EdgeInsets.only(
-                    left: 20,
+                    left: 23,
                     right: 8,
-                    bottom: 10,
-                    top: 10,
+                    top: 6,
                   ),
 
                   suffixIcon: IconButton(
@@ -248,41 +251,49 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   }
 
   Widget _buildCheckboxGrid(List<String> items, List<String> selectedList) {
-    return GridView.count(
-      crossAxisCount: 2,
+    return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      childAspectRatio: 4.5,
       padding: EdgeInsets.zero,
-      children: items.map((item) {
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisExtent: 32,
+        crossAxisSpacing: 10,
+      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
         return Row(
           children: [
-            Transform.scale(
-              scale: 0.9,
+            SizedBox(
+              width: 24,
+              height: 24,
               child: Checkbox(
                 value: selectedList.contains(item),
                 activeColor: AppColors.secondary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 onChanged: (val) => _toggleListItem(selectedList, item, val),
               ),
             ),
+            const SizedBox(width: 8),
             Expanded(
               child: Text(
                 item,
-                style: const TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w400,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.secondary,
-                  height: 1.2,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  letterSpacing: 0.2,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
         );
-      }).toList(),
+      },
     );
   }
 
@@ -309,10 +320,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         const SizedBox(width: 6),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
             color: AppColors.secondary,
+            fontWeight: FontWeight.bold,
+            fontSize: 11,
+            letterSpacing: 0.2,
           ),
         ),
       ],

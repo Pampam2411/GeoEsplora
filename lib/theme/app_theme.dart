@@ -28,8 +28,24 @@ class AppTheme {
         titleLarge: TextStyle(
           fontFamily: 'Axiforma',
           fontWeight: FontWeight.w400,
+          fontSize: 24,
+          height: 7.9,
+          color: AppColors.textPrimary,
+        ),
+
+        titleMedium: TextStyle(
+          fontFamily: 'Axiforma',
+          fontWeight: FontWeight.w400,
           fontSize: 20,
-          height: 1,
+          height: 10,
+          color: AppColors.textPrimary,
+        ),
+
+        titleSmall: TextStyle(
+          fontFamily: 'Axiforma',
+          fontWeight: FontWeight.w400,
+          fontSize: 10,
+          height: 5,
           color: AppColors.textPrimary,
         ),
 
@@ -38,13 +54,23 @@ class AppTheme {
           fontWeight: FontWeight.w400,
           fontSize: 14,
           height: 1,
+          letterSpacing: 0.2,
           color: AppColors.textPrimary,
         ),
 
         bodyMedium: TextStyle(
           fontFamily: 'Axiforma',
           fontWeight: FontWeight.w400,
-          fontSize: 12,
+          fontSize: 13,
+          height: 1.2,
+          letterSpacing: 0.2,
+          color: AppColors.secondary,
+        ),
+
+        bodySmall: TextStyle(
+          fontFamily: 'Axiforma',
+          fontWeight: FontWeight.w400,
+          fontSize: 10,
           height: 1.2,
           color: AppColors.secondary,
         ),
@@ -57,12 +83,12 @@ class AppTheme {
           elevation: 0,
           textStyle: const TextStyle(
             fontFamily: 'Axiforma',
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w400,
             fontSize: 16,
+            height: 1.0,
+            letterSpacing: 0.2,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         ),
       ),
