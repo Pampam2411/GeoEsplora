@@ -144,22 +144,12 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                     color: AppColors.secondary,
                     width: double.infinity,
                     child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            _selectedTabIndex == 1 ? 20 : 0,
-                          ),
-                          topRight: Radius.circular(
-                            _selectedTabIndex == 0 ? 20 : 0,
-                          ),
-                        ),
-                      ),
+                      decoration: BoxDecoration(color: AppColors.surface),
                       child: SingleChildScrollView(
                         padding: const EdgeInsets.only(
-                          top: 20.0,
-                          left: 20.0,
-                          right: 20.0,
+                          top: 22.0,
+                          left: 49.0,
+                          right: 49.0,
                           bottom: 40.0,
                         ),
                         child: _selectedTabIndex == 0
@@ -193,7 +183,7 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               "Dettagli",

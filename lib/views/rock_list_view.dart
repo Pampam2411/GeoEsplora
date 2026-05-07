@@ -17,7 +17,7 @@ class RockListView extends StatelessWidget {
       body: GridView.builder(
         padding: const EdgeInsets.all(16.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
           childAspectRatio: 1.0,

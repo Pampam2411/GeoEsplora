@@ -28,17 +28,13 @@ class FilterPills extends StatelessWidget {
               color: isSelected ? AppColors.textPrimary : AppColors.surface,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: isSelected
-                    ? AppColors.textPrimary
-                    : AppColors.borderLight,
+                color: isSelected ? AppColors.textPrimary : Colors.transparent,
               ),
             ),
             child: Text(
               options[index],
-              style: TextStyle(
-                color: isSelected ? AppColors.surface : AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: isSelected ? AppColors.surface : AppColors.secondary,
               ),
             ),
           ),

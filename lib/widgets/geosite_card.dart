@@ -28,7 +28,7 @@ class GeositeCard extends StatelessWidget {
       },
 
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(19),
+        borderRadius: BorderRadius.circular(16),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -61,7 +61,7 @@ class GeositeCard extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.only(
-                left: 30.0,
+                left: 35.0,
                 bottom: 30.0,
                 top: 16,
                 right: 16,
@@ -77,21 +77,23 @@ class GeositeCard extends StatelessWidget {
                       children: [
                         Text(
                           geosite.location,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(
+                                color: AppColors.titlePrimary,
+                                fontSize: 10,
+                              ),
                         ),
 
                         Text(
                           geosite.name,
-                          style: TextStyle(
-                            color: AppColors.surface,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(
+                                color: AppColors.titlePrimary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
                         ),
+
                         ReviewBadge(
                           reviewCount: geosite.reviewCount,
                           rating: geosite.rating,

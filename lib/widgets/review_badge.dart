@@ -30,7 +30,7 @@ class ReviewBadge extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 border: Border.all(color: textColor, width: 1),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(18.5),
               ),
               child: Row(
                 children: [
@@ -40,7 +40,7 @@ class ReviewBadge extends StatelessWidget {
                     rating!.toStringAsFixed(1),
                     style: TextStyle(
                       color: textColor,
-                      fontSize: 11,
+                      fontSize: 6,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -54,8 +54,8 @@ class ReviewBadge extends StatelessWidget {
             '$reviewCount recensioni',
             style: TextStyle(
               color: textColor,
-              fontSize: rating != null ? 11 : 12,
-              fontWeight: FontWeight.w500,
+              fontSize: rating != null ? 6 : 12,
+              fontWeight: isUnderlined ? FontWeight.w500 : FontWeight.bold,
               decoration: isUnderlined
                   ? TextDecoration.underline
                   : TextDecoration.none,

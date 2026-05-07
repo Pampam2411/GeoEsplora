@@ -4,40 +4,51 @@ import 'package:geoesplora/theme/app_color.dart';
 
 class MyRocksBanner extends StatelessWidget {
   final VoidCallback onCameraTap;
-
-  const MyRocksBanner({super.key, required this.onCameraTap});
+  final VoidCallback onMyRockTap;
+  const MyRocksBanner({
+    super.key,
+    required this.onCameraTap,
+    required this.onMyRockTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 76,
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: AppColors.primaryDark,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         children: [
           // PARTE SINISTRA
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  const FaIcon(
-                    FontAwesomeIcons.mountain,
-                    color: AppColors.textPrimary,
-                    size: 28,
-                  ),
-                  const SizedBox(width: 15),
-                  const Text(
-                    "Le mie rocce",
-                    style: TextStyle(
+            child: GestureDetector(
+              onTap: onMyRockTap,
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                padding: const EdgeInsets.only(left: 35),
+                height: 76,
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                child: Row(
+                  children: [
+                    const FaIcon(
+                      FontAwesomeIcons.mountain,
                       color: AppColors.textPrimary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      size: 28,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 15),
+                    Text(
+                      "Le mie rocce",
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleMedium?.copyWith(fontSize: 20),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -52,8 +63,8 @@ class MyRocksBanner extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: AppColors.primaryDark,
                 borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  topRight: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
               ),
               child: const Center(

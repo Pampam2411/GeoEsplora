@@ -21,7 +21,7 @@ class RockCard extends StatelessWidget {
       ),
 
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(21),
+        borderRadius: BorderRadius.circular(22),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -66,19 +66,21 @@ class RockCard extends StatelessWidget {
                       children: [
                         Text(
                           rock.name,
-                          style: const TextStyle(
-                            color: AppColors.surface,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.surface,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11,
+                              ),
                         ),
                         Text(
                           rock.type,
-                          style: const TextStyle(
-                            color: AppColors.surface,
-                            fontSize: 7,
-                            fontWeight: FontWeight.w300,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.surface,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 7,
+                              ),
                         ),
                       ],
                     ),

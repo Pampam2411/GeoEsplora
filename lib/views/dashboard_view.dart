@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/views/rock_list_view.dart';
+import 'package:geoesplora/widgets/custom_search_bar.dart';
 import 'package:geoesplora/widgets/my_rocks_banner.dart';
 import 'package:geoesplora/widgets/filter_pills.dart';
 import 'package:geoesplora/widgets/geosite_card.dart';
@@ -25,18 +28,39 @@ class _DashboardViewState extends State<DashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // SALUTO
-          const Text(
+          Text(
             "Hi, Giuseppe",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontSize: 20),
           ),
+
+          const SizedBox(height: 20),
+
+          //BARRA RICERCA
+          CustomSearchBar(),
+
+          const SizedBox(height: 20),
+
+          Text(
+            'Le tue attività',
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+          ),
+
           const SizedBox(height: 20),
 
           //BANNER MIE ROCCE
-          MyRocksBanner(onCameraTap: () => debugPrint("Apro fotocamera!")),
+          MyRocksBanner(
+            onCameraTap: () => debugPrint("Apro fotocamera!"),
+            onMyRockTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const RockListView()),
+              );
+            },
+          ),
           const SizedBox(height: 25),
 
           //TITOLO SEZIONE
@@ -44,22 +68,19 @@ class _DashboardViewState extends State<DashboardView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
+              Text(
                 "Geositi popolari",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
               ),
               GestureDetector(
                 onTap: () => debugPrint("Vai alla HomeView (Tutti i geositi)"),
-                child: const Text(
+                child: Text(
                   "visualizza tutti",
-                  style: TextStyle(
-                    fontSize: 12,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
                     color: AppColors.secondary,
-                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),
@@ -94,19 +115,26 @@ class _DashboardViewState extends State<DashboardView> {
               ),
             )
           else
-            SizedBox(
-              height: 220,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: geositi.length,
-                itemBuilder: (context, index) {
-                  final geosito = geositi[index];
-                  return Container(
-                    width: 280,
-                    margin: const EdgeInsets.only(right: 16.0),
-                    child: GeositeCard(geosite: geosito),
-                  );
-                },
+            Center(
+              child: SizedBox(
+                height: 347,
+                width: 279,
+                child: CardSwiper(
+                  scale: 0.9,
+                  cardsCount: geositi.length,
+                  isLoop: true,
+                  numberOfCardsDisplayed: 2,
+                  backCardOffset: const Offset(36, 0),
+                  padding: const EdgeInsets.only(left: 10, right: 20),
+                  allowedSwipeDirection: const AllowedSwipeDirection.symmetric(
+                    horizontal: true,
+                  ),
+                  controller: CardSwiperController(),
+                  cardBuilder:
+                      (context, index, percentThresholdX, percentThresholdY) {
+                        return GeositeCard(geosite: geositi[index]);
+                      },
+                ),
               ),
             ),
         ],
