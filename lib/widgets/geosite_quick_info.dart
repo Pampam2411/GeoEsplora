@@ -16,44 +16,62 @@ class GeositeQuickInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 25.0,
-      runSpacing: 10.0,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        //DURATA
-        _buildIconText(FontAwesomeIcons.clock, durata, AppColors.textPrimary),
-
-        //DISTANZA
-        _buildIconText(FontAwesomeIcons.route, distanza, AppColors.textPrimary),
-
-        Text(
-          prezzo,
-          style: const TextStyle(
-            color: Colors.green,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        children: [
+          //DURATA
+          _buildIconText(FontAwesomeIcons.clock, durata, AppColors.textPrimary),
+          const SizedBox(width: 25.0),
+          //DISTANZA
+          _buildIconText(
+            FontAwesomeIcons.route,
+            distanza,
+            AppColors.textPrimary,
           ),
-        ),
 
-        const FaIcon(FontAwesomeIcons.wheelchair, color: Colors.red, size: 20),
-
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const FaIcon(FontAwesomeIcons.star, color: Colors.amber, size: 20),
-            const SizedBox(width: 4),
-            Text(
-              rating.toStringAsFixed(1),
-              style: const TextStyle(
-                color: Colors.amber,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+          const SizedBox(width: 25.0),
+          //PREZZO
+          Text(
+            prezzo,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
             ),
-          ],
-        ),
-      ],
+          ),
+          const SizedBox(width: 25.0),
+
+          //ACCESSIBILITÀ
+          const FaIcon(
+            FontAwesomeIcons.wheelchair,
+            color: Colors.red,
+            size: 20,
+          ),
+          const SizedBox(width: 25.0),
+
+          //RECENSIONE
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const FaIcon(
+                FontAwesomeIcons.star,
+                color: Colors.amber,
+                size: 20,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                rating.toStringAsFixed(1),
+                style: const TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
