@@ -6,6 +6,7 @@ import 'package:geoesplora/widgets/detaild_tab_bar.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 import 'package:geoesplora/widgets/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/geosite_quick_info.dart';
+import 'package:geoesplora/widgets/geosite_review_sheet.dart';
 import 'package:geoesplora/widgets/primary_button.dart';
 import 'package:geoesplora/widgets/review_badge.dart';
 import 'package:geoesplora/models/geosite.dart';
@@ -27,7 +28,7 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppColors.background, // Sfondo base della pagina
+      backgroundColor: AppColors.background,
       body: Stack(
         children: [
           // 1. IMMAGINE E HEADER
@@ -197,7 +198,15 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
               reviewCount: widget.geosite.reviewCount,
               textColor: AppColors.secondary,
               isUnderlined: true,
-              onTap: () => debugPrint("Apri modale recensioni"),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) =>
+                      GeositeReviewsSheet(geosite: widget.geosite),
+                );
+              },
             ),
           ],
         ),

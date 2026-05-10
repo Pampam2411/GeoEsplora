@@ -4,6 +4,7 @@ import 'app_color.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      fontFamily: 'Axiforma',
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.background,
 
@@ -69,7 +70,7 @@ class AppTheme {
 
         bodySmall: TextStyle(
           fontFamily: 'Axiforma',
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w100,
           fontSize: 10,
           height: 1.2,
           color: AppColors.secondary,

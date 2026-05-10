@@ -3,6 +3,7 @@ import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/views/geosite_detail_screen.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
+import 'package:geoesplora/widgets/geosite_review_sheet.dart';
 import 'package:geoesplora/widgets/review_badge.dart';
 
 class GeositeCard extends StatelessWidget {
@@ -99,8 +100,12 @@ class GeositeCard extends StatelessWidget {
                           rating: geosite.rating,
                           textColor: AppColors.surface,
                           onTap: () {
-                            debugPrint(
-                              'premuto recensioni per ${geosite.name} dalla Card',
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) =>
+                                  GeositeReviewsSheet(geosite: geosite),
                             );
                           },
                         ),
