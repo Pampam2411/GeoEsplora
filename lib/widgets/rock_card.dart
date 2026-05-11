@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/views/rock_detail_screen.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 
 class RockCard extends StatelessWidget {
@@ -11,14 +12,13 @@ class RockCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 114,
-      width: 114,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: AppColors.surface, width: 1),
-        color: AppColors.textSecondary,
-      ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RockDetailScreen(rock: rock)),
+        );
+      },
 
       child: ClipRRect(
         borderRadius: BorderRadius.circular(22),

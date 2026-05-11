@@ -5,7 +5,9 @@ class Rock {
   final String imageUrl;
   final String geologicalEra;
   final String description;
-  final double hardness;
+  final double porosity;
+  final double resistence;
+  final double density;
 
   Rock({
     required this.id,
@@ -14,6 +16,8 @@ class Rock {
     required this.imageUrl,
     required this.geologicalEra,
     required this.description,
-    required this.hardness,
+    required this.density,
+    required this.porosity,
+    required this.resistence,
   });
 }

@@ -9,7 +9,7 @@ class AppColors {
   static const Color borderLight = Color(0xFFD9D9D9);
   static const Color background = Colors.white;
   static const Color titlePrimary = Colors.white;
-
+  static const Color rockCardDetail = Color(0xFF989186);
   static const Color surface = Colors.white;
   static const Color textSecondary = Colors.grey;
 }

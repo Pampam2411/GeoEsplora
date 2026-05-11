@@ -7,21 +7,25 @@ class MockData {
       id: 'r1',
       name: 'Granito Sila',
       type: 'Ignea Intrusiva',
-      imageUrl: 'https://images.unsplash.com/photo-1544607758-c0b62d8545e1',
+      imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b',
       geologicalEra: 'Paleozoico',
       description:
           'Una roccia dura e resistente, tipica dell\'altopiano silano, caratterizzata da grossi cristalli di quarzo e feldspato.',
-      hardness: 7.0,
+      density: 7.0,
+      porosity: 15,
+      resistence: 250,
     ),
     Rock(
       id: 'r2',
       name: 'Calcare Appenninico',
       type: 'Sedimentaria',
-      imageUrl: 'https://images.unsplash.com/photo-1621532051677-44a569736c57',
+      imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b',
       geologicalEra: 'Mesozoico',
       description:
           'Roccia sedimentaria chiara, formatasi in antichi mari bassi e caldi. Spesso contiene fossili.',
-      hardness: 3.5,
+      density: 3.5,
+      porosity: 15,
+      resistence: 250,
     ),
   ];
 

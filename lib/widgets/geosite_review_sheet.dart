@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -125,12 +124,9 @@ class GeositeReviewsSheet extends StatelessWidget {
 
   Widget _buildReviewItem() {
     return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 32.0,
-      ), // Spazio maggiore tra le recensioni
+      padding: const EdgeInsets.only(bottom: 32.0),
       child: Row(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // Allinea l'avatar in alto
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // AVATAR UTENTE
           const CircleAvatar(
