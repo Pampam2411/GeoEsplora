@@ -19,8 +19,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: AppColors.textPrimary,
           fontSize: 20,
           fontWeight: FontWeight.bold,
+<<<<<<< HEAD
           height: 1,
           fontFamily: 'AxiformaRegular',
+=======
+          fontFamily: 'AxiformaBold',
+>>>>>>> 4a1fb14c8e179ac05c0f937ead2510945d80f1c1
         ),
       ),
     );
