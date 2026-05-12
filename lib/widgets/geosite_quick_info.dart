@@ -85,7 +85,7 @@ class GeositeQuickInfo extends StatelessWidget {
           text,
           style: TextStyle(
             color: color,
-            fontWeight: FontWeight.bold,
+            fontFamily: 'AxiformaBold',
             fontSize: 14,
           ),
         ),

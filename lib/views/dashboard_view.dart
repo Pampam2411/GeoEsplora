@@ -44,9 +44,10 @@ class _DashboardViewState extends State<DashboardView> {
 
           Text(
             'Le tue attività',
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontFamily: 'AxiformaBold',
+              fontSize: 10,
+            ),
           ),
 
           const SizedBox(height: 20),
@@ -70,9 +71,10 @@ class _DashboardViewState extends State<DashboardView> {
             children: [
               Text(
                 "Geositi popolari",
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontFamily: 'AxiformaBold',
+                  fontSize: 10,
+                ),
               ),
               GestureDetector(
                 onTap: () => debugPrint("Vai alla HomeView (Tutti i geositi)"),

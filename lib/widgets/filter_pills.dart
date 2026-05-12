@@ -35,6 +35,9 @@ class FilterPills extends StatelessWidget {
               options[index],
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: isSelected ? AppColors.surface : AppColors.secondary,
+                fontFamily: 'AxiformaBold',
+                fontSize: 10,
+                height: 1,
               ),
             ),
           ),

@@ -69,7 +69,7 @@ class RockCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(
                                 color: AppColors.surface,
-                                fontWeight: FontWeight.bold,
+                                fontFamily: 'AxiformaBold',
                                 fontSize: 11,
                               ),
                         ),
@@ -78,7 +78,7 @@ class RockCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(
                                 color: AppColors.surface,
-                                fontWeight: FontWeight.w300,
+                                fontFamily: 'AxiformaLight',
                                 fontSize: 7,
                               ),
                         ),

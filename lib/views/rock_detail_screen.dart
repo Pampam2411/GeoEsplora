@@ -1,9 +1,8 @@
-// lib/views/rock_detail_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/custom_back_button.dart';
+import 'package:geoesplora/widgets/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 
 class RockDetailScreen extends StatelessWidget {
@@ -54,43 +53,62 @@ class RockDetailScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 10.0,
+                      vertical: 8.0,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CustomBackButton(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              rock.name,
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(
-                                    color: AppColors.background,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 48,
-                                  ),
-                            ),
-                            Text(
-                              rock.type,
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(
-                                    color: AppColors.background,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 13,
-                                  ),
-                            ),
-                          ],
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: const CustomBackButton(),
                         ),
 
-                        const FavoriteButton(
-                          isInitiallyFavorite: false,
-                          size: 36,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: const FavoriteButton(
+                            isInitiallyFavorite: false,
+                            size: 36,
+                          ),
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Positioned(
+                  left: 44,
+                  right: 44,
+                  top: 80,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          rock.name.toUpperCase(),
+                          style: const TextStyle(
+                            color: AppColors.surface,
+                            fontSize: 48,
+                            fontFamily: 'AxiformaBlack',
+                            height: 1.0,
+                          ),
+                        ),
+                      ),
+
+                      Text(
+                        textAlign: TextAlign.center,
+                        rock.type,
+                        style: const TextStyle(
+                          color: AppColors.surface,
+                          fontSize: 13,
+                          fontFamily: 'AxiformaBold',
+                          height: 1.0,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -145,23 +163,32 @@ class RockDetailScreen extends StatelessWidget {
                                   rock.resistence % 1 == 0
                                       ? rock.resistence.toInt().toString()
                                       : rock.resistence.toString(),
-                                  "MPa",
+                                  "MPA",
                                 ),
                               ),
                             ],
                           ),
 
-                          const SizedBox(height: 38.64),
+                          const SizedBox(height: 16),
 
                           // DESCRIZIONE
                           Text(
                             rock.description,
                             style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w300,
+                              fontSize: 13,
                               color: AppColors.rockCardDetail,
                               height: 1.0,
-                              fontFamily: 'Axiforma',
+                              fontFamily: 'AxiformaLight',
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            "Riconoscimenti",
+                            style: TextStyle(
+                              fontFamily: 'AxiformaBold',
+                              fontSize: 14,
+                              height: 1.0,
+                              letterSpacing: 0.2,
                             ),
                           ),
                         ],
@@ -174,51 +201,75 @@ class RockDetailScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottomNav(),
     );
   }
 
   Widget _buildInfo(String title, String value, String unit) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.transparent,
-
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text.rich(
-            TextSpan(
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextSpan(
-                  text: value,
-                  style: TextStyle(
+                Text(
+                  value,
+                  style: const TextStyle(
                     fontSize: 32,
-                    fontWeight: FontWeight.bold,
                     color: AppColors.rockCardDetail,
-                    fontFamily: 'Axiforma',
+                    fontFamily: 'AxiformaBlack',
                   ),
                 ),
 
-                TextSpan(
-                  text: " $unit",
-                  style: TextStyle(
-                    fontSize: unit == '%' ? 15 : 11,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.rockCardDetail,
-                    fontFamily: 'Axiforma',
-                  ),
-                ),
+                const SizedBox(width: 4),
+                unit == "g/cm^3"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "g",
+                            style: TextStyle(
+                              fontFamily: 'AxiformaLight',
+                              fontSize: 10,
+                              color: AppColors.rockCardDetail,
+                              height: 1.0,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            "cm³",
+                            style: TextStyle(
+                              fontFamily: 'AxiformaLight',
+                              fontSize: 10,
+                              color: AppColors.rockCardDetail,
+                              height: 1.0,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: Text(
+                          unit,
+                          style: TextStyle(
+                            fontSize: unit == '%' ? 20 : 13,
+                            color: AppColors.rockCardDetail,
+                            fontFamily: 'AxiformaLight',
+                          ),
+                        ),
+                      ),
               ],
             ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.visible,
           ),
-
-          const SizedBox(height: 6),
-
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.center,
@@ -226,9 +277,8 @@ class RockDetailScreen extends StatelessWidget {
               title,
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.bold,
                 color: AppColors.rockCardDetail,
-                fontFamily: 'Axiforma',
+                fontFamily: 'AxiformaBlack',
               ),
             ),
           ),

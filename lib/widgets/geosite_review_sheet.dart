@@ -47,7 +47,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                       geosite.name,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: AppColors.textPrimary,
-                        fontWeight: FontWeight.bold,
+                        fontFamily: 'AxiformaBold',
                         fontSize: 32,
                         letterSpacing: 0.2,
                       ),
@@ -66,8 +66,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
                                 color: AppColors.textPrimary,
-                                fontFamily: 'Axiforma',
-                                fontWeight: FontWeight.w300,
+                                fontFamily: 'AxiformaLight',
                                 fontSize: 24,
                                 letterSpacing: 0.2,
                               ),
@@ -83,7 +82,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleSmall
                               ?.copyWith(
                                 fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                                fontFamily: 'AxiformaBold',
                                 letterSpacing: 0.2,
                                 color: AppColors.textPrimary,
                               ),
@@ -152,8 +151,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                     color: AppColors.textPrimary,
                     fontSize: 11,
                     height: 1.2,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Axiforma',
+                    fontFamily: 'AxiformaLight',
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -165,8 +163,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 11,
-                        fontFamily: 'Axiforma',
-                        fontWeight: FontWeight.w300,
+                        fontFamily: 'AxiformaLight',
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -176,13 +173,17 @@ class GeositeReviewsSheet extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 11,
-                        fontWeight: FontWeight.bold,
+                        fontFamily: 'AxiformaLight',
                       ),
                     ),
                     const SizedBox(width: 12),
                     const Text(
                       "11:36 25/02/2026",
-                      style: TextStyle(color: Colors.grey, fontSize: 11),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 11,
+                        fontFamily: 'AxiformaLight',
+                      ),
                     ),
                   ],
                 ),

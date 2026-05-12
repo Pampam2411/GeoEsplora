@@ -46,7 +46,7 @@ class DetailTabBar extends StatelessWidget {
                     color: selectedIndex == 0
                         ? AppColors.textPrimary
                         : AppColors.surface,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'AxiformaBold',
                     fontSize: 14,
                   ),
                 ),
@@ -75,7 +75,7 @@ class DetailTabBar extends StatelessWidget {
                     color: selectedIndex == 1
                         ? AppColors.textPrimary
                         : AppColors.surface,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'AxiformaBold',
                     fontSize: 14,
                   ),
                 ),
