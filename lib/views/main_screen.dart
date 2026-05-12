@@ -15,7 +15,6 @@ class MainScreen extends ConsumerWidget {
     final List<Widget> pages = [
       const DashboardView(),
       const Center(child: Text('Schermata Mappa')),
-
       const Center(child: Text('Schermata Fotocamera')),
       const RockListView(),
       const Center(child: Text('Schermata Profilo')),
@@ -23,14 +22,7 @@ class MainScreen extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            ),
-            Expanded(child: pages[currentIndex]),
-          ],
-        ),
+        child: Column(children: [Expanded(child: pages[currentIndex])]),
       ),
       bottomNavigationBar: const CustomBottomNav(),
     );

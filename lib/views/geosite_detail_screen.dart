@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/custom_back_button.dart';
+import 'package:geoesplora/widgets/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/detaild_tab_bar.dart';
 import 'package:geoesplora/widgets/favorite_button.dart';
 import 'package:geoesplora/widgets/geosite_map_preview.dart';
@@ -84,16 +85,20 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                 ),
                 Positioned(
                   left: 20,
+                  right: 20,
                   bottom: 70,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.geosite.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          widget.geosite.name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 5),
@@ -105,12 +110,15 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                             size: 16,
                           ),
                           const SizedBox(width: 5),
-                          Text(
-                            widget.geosite.location,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              widget.geosite.location,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ],
@@ -165,6 +173,7 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottomNav(),
     );
   }
 
@@ -190,8 +199,8 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
               "Dettagli",
               style: TextStyle(
                 color: AppColors.textPrimary,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontFamily: 'AxiformaBold',
+                fontSize: 14,
               ),
             ),
             ReviewBadge(
@@ -216,8 +225,10 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
           widget.geosite.description,
           style: const TextStyle(
             color: AppColors.secondary,
-            fontWeight: FontWeight.w400,
+            fontFamily: 'AxiformaLight',
             fontSize: 13,
+            height: 1.2,
+            letterSpacing: 0.2,
           ),
         ),
         const SizedBox(height: 10),
@@ -231,8 +242,8 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                 "Leggi di più",
                 style: TextStyle(
                   color: AppColors.secondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                  fontFamily: 'AxiformaBold',
                   decoration: TextDecoration.underline,
                 ),
               ),
@@ -244,8 +255,8 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                 "Informazioni sull'accessibilità",
                 style: TextStyle(
                   color: AppColors.secondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                  fontFamily: 'AxiformaBold',
                   decoration: TextDecoration.underline,
                 ),
               ),
@@ -254,16 +265,12 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
         ),
         const SizedBox(height: 20),
 
-        // Mappa
-        const GeositeMapPreview(),
-        const SizedBox(height: 20),
-
         const Text(
           "Immagini",
           style: TextStyle(
             color: AppColors.textPrimary,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontFamily: 'AxiformaBold',
+            fontSize: 14,
           ),
         ),
         const SizedBox(height: 10),
@@ -291,6 +298,11 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
             },
           ),
         ),
+
+        const SizedBox(height: 20),
+        // Mappa
+        const GeositeMapPreview(),
+
         const SizedBox(height: 30),
 
         // Bottone finale
@@ -310,7 +322,7 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
       children: [
         const Text(
           "Dati Tecnici",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(fontFamily: 'AxiformaBold', fontSize: 18),
         ),
         const SizedBox(height: 10),
         const Text(

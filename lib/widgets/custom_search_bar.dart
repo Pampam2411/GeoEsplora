@@ -77,7 +77,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppColors.secondary,
                     fontSize: 10,
-                    fontWeight: FontWeight.w400,
+                    fontFamily: 'AxiformaRegular',
                   ),
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
@@ -129,7 +129,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //SLIDER TEMPO
-          _buildSectionTitle('Tempo disponibilile (minuti)'),
+          _buildSectionTitle('Tempo disponibile (minuti)'),
           Slider(
             value: _tempoDisponibile,
             max: 60,
@@ -190,7 +190,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildSectionTitle('Accessibiliȧ'),
+              _buildSectionTitle('Accessibilità'),
               Switch(
                 value: _accessibilita,
                 activeThumbColor: AppColors.secondary,
@@ -241,7 +241,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       child: Text(
         title,
         style: const TextStyle(
-          fontWeight: FontWeight.w700,
+          fontFamily: 'AxiformaBold',
           fontSize: 13,
           color: AppColors.textPrimary,
           letterSpacing: 0.26,
@@ -284,7 +284,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 item,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.secondary,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: 'AxiformaBold',
                   fontSize: 11,
                   letterSpacing: 0.2,
                 ),
@@ -322,7 +322,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
             color: AppColors.secondary,
-            fontWeight: FontWeight.bold,
+            fontFamily: 'AxiformaBold',
             fontSize: 11,
             letterSpacing: 0.2,
           ),

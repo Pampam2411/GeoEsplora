@@ -22,11 +22,23 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
-    - family: Axiforma
+
+    - family: AxiformaRegular
       fonts:
         - asset: assets/fonts/Axiforma-Regular.ttf
           weight: 400
+
+    - family: AxiformaBold
+      fonts:
         - asset: assets/fonts/Axiforma-Bold.ttf
           weight: 700
+
+    - family: AxiformaLight
+      fonts:
         - asset: assets/fonts/Axiforma-Light.ttf
           weight: 300
+
+    - family: AxiformaBlack
+      fonts:
+      - asset: assets/fonts/Axiforma-Black.ttf
+        weight: 900

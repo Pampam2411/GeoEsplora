@@ -42,7 +42,7 @@ class PrimaryButton extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
-                fontWeight: FontWeight.bold,
+                fontFamily: 'AxiformaBold',
               ),
             ),
             if (icon != null) ...[

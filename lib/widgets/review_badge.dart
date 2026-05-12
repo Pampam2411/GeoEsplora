@@ -54,8 +54,8 @@ class ReviewBadge extends StatelessWidget {
             '$reviewCount recensioni',
             style: TextStyle(
               color: textColor,
-              fontSize: rating != null ? 6 : 12,
-              fontWeight: isUnderlined ? FontWeight.w500 : FontWeight.bold,
+              fontSize: rating != null ? 6 : 10,
+              fontFamily: 'AxiformaBold',
               decoration: isUnderlined
                   ? TextDecoration.underline
                   : TextDecoration.none,

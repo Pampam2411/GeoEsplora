@@ -20,7 +20,7 @@ class AppTheme {
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontFamily: 'Axiforma',
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.w700,
           fontSize: 48,
           height: 1.07,
           color: AppColors.textPrimary,
@@ -69,8 +69,7 @@ class AppTheme {
         ),
 
         bodySmall: TextStyle(
-          fontFamily: 'Axiforma',
-          fontWeight: FontWeight.w100,
+          fontFamily: 'AxiformaBold',
           fontSize: 10,
           height: 1.2,
           color: AppColors.secondary,

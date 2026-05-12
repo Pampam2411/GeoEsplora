@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/views/geosite_list_view.dart';
 import 'package:geoesplora/views/rock_list_view.dart';
+import 'package:geoesplora/widgets/custom_app_bar.dart';
 import 'package:geoesplora/widgets/custom_search_bar.dart';
 import 'package:geoesplora/widgets/my_rocks_banner.dart';
 import 'package:geoesplora/widgets/filter_pills.dart';
@@ -23,17 +25,12 @@ class _DashboardViewState extends State<DashboardView> {
     final geositi = MockData.mockGeosites;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // SALUTO
-          Text(
-            "Hi, Giuseppe",
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontSize: 20),
-          ),
+          CustomAppBar(title: "Hi Giuseppe"),
 
           const SizedBox(height: 20),
 
@@ -44,9 +41,10 @@ class _DashboardViewState extends State<DashboardView> {
 
           Text(
             'Le tue attività',
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontFamily: 'AxiformaBold',
+              fontSize: 10,
+            ),
           ),
 
           const SizedBox(height: 20),
@@ -70,12 +68,20 @@ class _DashboardViewState extends State<DashboardView> {
             children: [
               Text(
                 "Geositi popolari",
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  fontFamily: 'AxiformaBold',
+                  fontSize: 10,
+                ),
               ),
               GestureDetector(
-                onTap: () => debugPrint("Vai alla HomeView (Tutti i geositi)"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const GeositeListView(),
+                    ),
+                  );
+                },
                 child: Text(
                   "visualizza tutti",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(

@@ -82,6 +82,7 @@ class GeositeCard extends StatelessWidget {
                               ?.copyWith(
                                 color: AppColors.titlePrimary,
                                 fontSize: 10,
+                                fontFamily: 'AxiformaLight',
                               ),
                         ),
 
@@ -90,7 +91,7 @@ class GeositeCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge
                               ?.copyWith(
                                 color: AppColors.titlePrimary,
-                                fontWeight: FontWeight.bold,
+                                fontFamily: 'AxiformaBold',
                                 fontSize: 24,
                               ),
                         ),

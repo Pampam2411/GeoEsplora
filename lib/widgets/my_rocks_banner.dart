@@ -43,9 +43,10 @@ class MyRocksBanner extends StatelessWidget {
                     const SizedBox(width: 15),
                     Text(
                       "Le mie rocce",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleMedium?.copyWith(fontSize: 20),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: 20,
+                        fontFamily: 'AxiformaRegular',
+                      ),
                     ),
                   ],
                 ),

@@ -26,7 +26,7 @@ class GeositeMapPreview extends StatelessWidget {
             );
           },
           child: Container(
-            height: 160, // Altezza fissa per il pezzetto di mappa
+            height: 160,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),

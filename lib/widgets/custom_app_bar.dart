@@ -1,45 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final bool showBackButton;
-  final List<Widget>? actions;
 
-  const CustomAppBar({
-    super.key,
-    required this.title,
-    this.showBackButton = true,
-    this.actions,
-  });
+  const CustomAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.transparent,
       elevation: 0,
-      centerTitle: true,
-      leading: showBackButton
-          ? IconButton(
-              icon: const FaIcon(
-                FontAwesomeIcons.chevronLeft,
-                color: AppColors.textPrimary,
-                size: 20,
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            )
-          : null,
+      scrolledUnderElevation: 0,
+      surfaceTintColor: Colors.transparent,
       title: Text(
         title,
         style: const TextStyle(
           color: AppColors.textPrimary,
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
-          fontFamily: 'Axiforma',
+          height: 1,
+          fontFamily: 'AxiformaRegular',
         ),
       ),
-      actions: actions,
     );
   }
 
