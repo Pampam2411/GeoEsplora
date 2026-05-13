@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/views/geosite_detail_screen.dart';
-import 'package:geoesplora/widgets/favorite_button.dart';
-import 'package:geoesplora/widgets/geosite_review_sheet.dart';
-import 'package:geoesplora/widgets/review_badge.dart';
+import 'package:geoesplora/widgets/buttons/favorite_button.dart';
+import 'package:geoesplora/widgets/sections/geosite_review_sheet.dart';
+import 'package:geoesplora/widgets/indicators/review_badge.dart';
+import 'package:geoesplora/widgets/texts/card_subtitle.dart';
+import 'package:geoesplora/widgets/texts/card_title.dart';
 
 class GeositeCard extends StatelessWidget {
   final Geosite geosite;
@@ -76,25 +78,9 @@ class GeositeCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          geosite.location,
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(
-                                color: AppColors.titlePrimary,
-                                fontSize: 10,
-                                fontFamily: 'AxiformaLight',
-                              ),
-                        ),
+                        CardSubtitle(text: geosite.location, fontSize: 10),
 
-                        Text(
-                          geosite.name,
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(
-                                color: AppColors.titlePrimary,
-                                fontFamily: 'AxiformaBold',
-                                fontSize: 24,
-                              ),
-                        ),
+                        CardTitle(text: geosite.name, fontSize: 24),
 
                         ReviewBadge(
                           reviewCount: geosite.reviewCount,

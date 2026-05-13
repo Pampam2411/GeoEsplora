@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class FilterPills extends StatelessWidget {
   final List<String> options;
@@ -27,18 +28,11 @@ class FilterPills extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSelected ? AppColors.textPrimary : AppColors.surface,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: isSelected ? AppColors.textPrimary : Colors.transparent,
-              ),
             ),
-            child: Text(
-              options[index],
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: isSelected ? AppColors.surface : AppColors.secondary,
-                fontFamily: 'AxiformaBold',
-                fontSize: 10,
-                height: 1,
-              ),
+            child: SectionLabel(
+              text: options[index],
+              color: isSelected ? AppColors.surface : AppColors.secondary,
+              fontSize: 10,
             ),
           ),
         );

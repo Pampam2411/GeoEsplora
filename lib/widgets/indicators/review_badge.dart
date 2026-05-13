@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class ReviewBadge extends StatelessWidget {
   final int reviewCount;
@@ -36,13 +37,10 @@ class ReviewBadge extends StatelessWidget {
                 children: [
                   Icon(Icons.star_border, color: textColor, size: 12),
                   const SizedBox(width: 4),
-                  Text(
-                    rating!.toStringAsFixed(1),
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 6,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  SectionLabel(
+                    text: rating!.toStringAsFixed(1),
+                    fontSize: 6,
+                    color: textColor,
                   ),
                 ],
               ),
@@ -50,16 +48,13 @@ class ReviewBadge extends StatelessWidget {
             const SizedBox(width: 8),
           ],
 
-          Text(
-            '$reviewCount recensioni',
-            style: TextStyle(
-              color: textColor,
-              fontSize: rating != null ? 6 : 10,
-              fontFamily: 'AxiformaBold',
-              decoration: isUnderlined
-                  ? TextDecoration.underline
-                  : TextDecoration.none,
-            ),
+          SectionLabel(
+            text: "$reviewCount recensioni",
+            fontSize: rating != null ? 6 : 10,
+            decoration: isUnderlined
+                ? TextDecoration.underline
+                : TextDecoration.none,
+            color: textColor,
           ),
         ],
       ),
