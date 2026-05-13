@@ -1,16 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BottomNavViewModel extends Notifier<int> {
+class BottomNavNotifier extends Notifier<int> {
   @override
   int build() {
     return 0;
   }
 
-  void setIndex(int newIndex) {
+  void changePage(int newIndex) {
     state = newIndex;
   }
 }
 
-final bottomNavProvider = NotifierProvider<BottomNavViewModel, int>(() {
-  return BottomNavViewModel();
+final bottomNavIndexProvider = NotifierProvider<BottomNavNotifier, int>(() {
+  return BottomNavNotifier();
 });

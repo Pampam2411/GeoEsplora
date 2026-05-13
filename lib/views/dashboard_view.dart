@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/views/geosite_list_view.dart';
-import 'package:geoesplora/views/rock_list_view.dart';
 import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
 import 'package:geoesplora/widgets/sections/my_rocks_banner.dart';
 import 'package:geoesplora/widgets/inputs/filter_pills.dart';
@@ -11,14 +12,14 @@ import 'package:geoesplora/models/mock_data.dart';
 import 'package:geoesplora/widgets/texts/section_label.dart';
 import 'package:geoesplora/widgets/texts/title_page.dart';
 
-class DashboardView extends StatefulWidget {
+class DashboardView extends ConsumerStatefulWidget {
   const DashboardView({super.key});
 
   @override
-  State<DashboardView> createState() => _DashboardViewState();
+  ConsumerState<DashboardView> createState() => _DashboardViewState();
 }
 
-class _DashboardViewState extends State<DashboardView> {
+class _DashboardViewState extends ConsumerState<DashboardView> {
   int _selectedFilterIndex = 0;
 
   @override
@@ -45,12 +46,11 @@ class _DashboardViewState extends State<DashboardView> {
 
           //BANNER MIE ROCCE
           MyRocksBanner(
-            onCameraTap: () => debugPrint("Apro fotocamera!"),
+            onCameraTap: () {
+              ref.read(bottomNavIndexProvider.notifier).changePage(2);
+            },
             onMyRockTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const RockListView()),
-              );
+              ref.read(bottomNavIndexProvider.notifier).changePage(3);
             },
           ),
           const SizedBox(height: 25),
@@ -109,9 +109,10 @@ class _DashboardViewState extends State<DashboardView> {
           else
             Center(
               child: SizedBox(
-                height: 347,
+                height: 300,
                 width: 279,
                 child: CardSwiper(
+                  showBackCardOnUndo: true,
                   scale: 0.9,
                   cardsCount: geositi.length,
                   isLoop: true,
@@ -124,7 +125,10 @@ class _DashboardViewState extends State<DashboardView> {
                   controller: CardSwiperController(),
                   cardBuilder:
                       (context, index, percentThresholdX, percentThresholdY) {
-                        return GeositeCard(geosite: geositi[index]);
+                        return GeositeCard(
+                          geosite: geositi[index],
+                          showShadow: true,
+                        );
                       },
                 ),
               ),

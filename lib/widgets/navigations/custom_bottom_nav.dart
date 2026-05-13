@@ -1,50 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geoesplora/theme/app_color.dart';
-import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoesplora/theme/app_color.dart';
 
-class CustomBottomNav extends ConsumerWidget {
-  const CustomBottomNav({super.key});
+class CustomBottomNav extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const CustomBottomNav({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentIndex = ref.watch(bottomNavProvider);
+  Widget build(BuildContext context) {
+    // Calcoliamo una proporzione per l'altezza totale (barra + sporgenza)
+    final totalHeight = MediaQuery.sizeOf(context).height * 0.12;
 
-    return BottomAppBar(
-      color: AppColors.secondary,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      height: 70,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return SizedBox(
+      height: totalHeight,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          _buildNavItem(0, FontAwesomeIcons.house, currentIndex, ref),
-          _buildNavItem(1, FontAwesomeIcons.map, currentIndex, ref),
-          _buildNavItem(2, FontAwesomeIcons.camera, currentIndex, ref),
-          _buildNavItem(3, FontAwesomeIcons.mountain, currentIndex, ref),
-          _buildNavItem(4, FontAwesomeIcons.user, currentIndex, ref),
+          BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: AppColors.secondary,
+            selectedItemColor: AppColors.surface,
+            unselectedItemColor: AppColors.surface,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            currentIndex: currentIndex,
+            onTap: onTap,
+            items: [
+              const BottomNavigationBarItem(
+                label: 'Home',
+                icon: FaIcon(FontAwesomeIcons.house),
+              ),
+              const BottomNavigationBarItem(
+                label: 'Mappa',
+                icon: FaIcon(FontAwesomeIcons.map),
+              ),
+
+              const BottomNavigationBarItem(
+                label: '',
+                icon: SizedBox(width: 40),
+              ),
+
+              const BottomNavigationBarItem(
+                label: 'Rocce',
+                icon: FaIcon(FontAwesomeIcons.mountain),
+              ),
+              const BottomNavigationBarItem(
+                label: 'Profilo',
+                icon: FaIcon(FontAwesomeIcons.user),
+              ),
+            ],
+          ),
+
+          Positioned(
+            top: 20,
+            child: GestureDetector(
+              onTap: () => onTap(2),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.secondary,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.secondary.withValues(alpha: 0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF9F988E),
+                    shape: BoxShape.circle,
+                  ),
+                  child: FaIcon(
+                    FontAwesomeIcons.camera,
+                    color: AppColors.surface,
+                    size: 32,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
-    );
-  }
-
-  Widget _buildNavItem(
-    int index,
-    FaIconData icon,
-    int currentIndex,
-    WidgetRef ref,
-  ) {
-    final isSelected = index == currentIndex;
-
-    return IconButton(
-      icon: FaIcon(
-        icon,
-        color: isSelected
-            ? AppColors.surface
-            : AppColors.surface.withValues(alpha: 0.5),
-        size: isSelected ? 24 : 22,
-      ),
-      onPressed: () => ref.read(bottomNavProvider.notifier).setIndex(index),
     );
   }
 }

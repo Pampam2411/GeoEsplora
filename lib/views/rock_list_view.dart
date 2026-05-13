@@ -13,17 +13,18 @@ class RockListView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TitlePage(title: "Le tue rocce"),
           const SizedBox(height: 20),
 
           CustomSearchBar(),
+
           const SizedBox(height: 20),
 
           Expanded(
             child: GridView.builder(
               shrinkWrap: true,
-              padding: const EdgeInsets.all(16.0),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 16.0,

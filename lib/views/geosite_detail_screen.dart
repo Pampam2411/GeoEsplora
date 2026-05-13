@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/widgets/buttons/custom_back_button.dart';
 import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/navigations/detaild_tab_bar.dart';
@@ -16,22 +18,23 @@ import 'package:geoesplora/widgets/texts/card_title.dart';
 import 'package:geoesplora/widgets/texts/detail_text.dart';
 import 'package:geoesplora/widgets/texts/section_label.dart';
 
-class GeositoDetailScreen extends StatefulWidget {
+class GeositoDetailScreen extends ConsumerStatefulWidget {
   final Geosite geosite;
 
   const GeositoDetailScreen({super.key, required this.geosite});
 
   @override
-  State<GeositoDetailScreen> createState() => _GeositoDetailScreenState();
+  ConsumerState<GeositoDetailScreen> createState() =>
+      _GeositoDetailScreenState();
 }
 
-class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
+class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
   int _selectedTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
+    final currentIndex = ref.watch(bottomNavIndexProvider);
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
@@ -88,9 +91,9 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                   ),
                 ),
                 Positioned(
-                  left: 44,
-                  right: 44,
-                  bottom: 70,
+                  left: 46,
+                  right: 46,
+                  bottom: 80,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -169,7 +172,13 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomBottomNav(),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: currentIndex,
+        onTap: (index) {
+          ref.read(bottomNavIndexProvider.notifier).state = index;
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        },
+      ),
     );
   }
 

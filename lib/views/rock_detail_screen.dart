@@ -187,7 +187,6 @@ class RockDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomBottomNav(),
     );
   }
 
