@@ -11,11 +11,13 @@ import 'package:geoesplora/widgets/texts/card_title.dart';
 class GeositeCard extends StatelessWidget {
   final Geosite geosite;
   final bool isFavorite;
+  final bool showShadow;
 
   const GeositeCard({
     super.key,
     required this.geosite,
     this.isFavorite = false,
+    this.showShadow = false,
   });
 
   @override
@@ -29,88 +31,108 @@ class GeositeCard extends StatelessWidget {
           ),
         );
       },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
 
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            //IMMAGINE CARD
-            Image.network(
-              geosite.imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(
-                  Icons.image_not_supported,
-                  color: AppColors.textSecondary,
+          boxShadow: showShadow
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.15),
+                    blurRadius: 20,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 10),
+                  ),
+                ]
+              : [],
+        ),
+
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              //IMMAGINE CARD
+              Image.network(
+                geosite.imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Center(
+                  child: Icon(
+                    Icons.image_not_supported,
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ),
-            ),
 
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withValues(alpha: 0.1),
-                    Colors.black.withValues(alpha: 0.8),
-                  ],
-                  stops: const [0.0, 0.5, 1.0],
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withValues(alpha: 0.1),
+                      Colors.black.withValues(alpha: 0.8),
+                    ],
+                    stops: const [0.0, 0.5, 1.0],
+                  ),
                 ),
               ),
-            ),
 
-            Padding(
-              padding: EdgeInsets.only(
-                left: 35.0,
-                bottom: 30.0,
-                top: 16,
-                right: 16,
-              ),
-              child: Stack(
-                children: [
-                  //TESTO PLACEHOLDER E LOCATION
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CardSubtitle(text: geosite.location, fontSize: 10),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 35.0,
+                  bottom: 30.0,
+                  top: 16,
+                  right: 16,
+                ),
+                child: Stack(
+                  children: [
+                    //TESTO PLACEHOLDER E LOCATION
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CardSubtitle(text: geosite.location, fontSize: 10),
 
-                        CardTitle(text: geosite.name, fontSize: 24),
+                          CardTitle(text: geosite.name, fontSize: 24),
 
-                        ReviewBadge(
-                          reviewCount: geosite.reviewCount,
-                          rating: geosite.rating,
-                          textColor: AppColors.surface,
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              builder: (context) =>
-                                  GeositeReviewsSheet(geosite: geosite),
-                            );
-                          },
-                        ),
+                          ReviewBadge(
+                            reviewCount: geosite.reviewCount,
+                            rating: geosite.rating,
+                            textColor: AppColors.surface,
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) =>
+                                    GeositeReviewsSheet(geosite: geosite),
+                              );
+                            },
+                          ),
 
-                        const SizedBox(height: 6),
-                      ],
+                          const SizedBox(height: 6),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  //PULSANTE PREFERITO
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: FavoriteButton(isInitiallyFavorite: false, size: 36),
-                  ),
-                ],
+                    //PULSANTE PREFERITO
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: FavoriteButton(
+                        isInitiallyFavorite: false,
+                        size: 30,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
