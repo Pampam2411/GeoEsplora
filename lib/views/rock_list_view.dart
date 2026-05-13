@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/mock_data.dart';
-import 'package:geoesplora/widgets/custom_app_bar.dart';
-import 'package:geoesplora/widgets/custom_search_bar.dart';
-import 'package:geoesplora/widgets/rock_card.dart';
+import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
+import 'package:geoesplora/widgets/cards/rock_card.dart';
+import 'package:geoesplora/widgets/texts/title_page.dart';
 
 class RockListView extends StatelessWidget {
   const RockListView({super.key});
@@ -14,7 +14,7 @@ class RockListView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          CustomAppBar(title: "Le tue rocce"),
+          TitlePage(title: "Le tue rocce"),
           const SizedBox(height: 20),
 
           CustomSearchBar(),

@@ -3,12 +3,13 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/views/geosite_list_view.dart';
 import 'package:geoesplora/views/rock_list_view.dart';
-import 'package:geoesplora/widgets/custom_app_bar.dart';
-import 'package:geoesplora/widgets/custom_search_bar.dart';
-import 'package:geoesplora/widgets/my_rocks_banner.dart';
-import 'package:geoesplora/widgets/filter_pills.dart';
-import 'package:geoesplora/widgets/geosite_card.dart';
+import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
+import 'package:geoesplora/widgets/sections/my_rocks_banner.dart';
+import 'package:geoesplora/widgets/inputs/filter_pills.dart';
+import 'package:geoesplora/widgets/cards/geosite_card.dart';
 import 'package:geoesplora/models/mock_data.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
+import 'package:geoesplora/widgets/texts/title_page.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
@@ -30,7 +31,7 @@ class _DashboardViewState extends State<DashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // SALUTO
-          CustomAppBar(title: "Hi Giuseppe"),
+          TitlePage(title: "Hi, Giuseppe"),
 
           const SizedBox(height: 20),
 
@@ -38,14 +39,7 @@ class _DashboardViewState extends State<DashboardView> {
           CustomSearchBar(),
 
           const SizedBox(height: 20),
-
-          Text(
-            'Le tue attività',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontFamily: 'AxiformaBold',
-              fontSize: 10,
-            ),
-          ),
+          SectionLabel(text: "Le tue attività", fontSize: 10),
 
           const SizedBox(height: 20),
 
@@ -66,13 +60,7 @@ class _DashboardViewState extends State<DashboardView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                "Geositi popolari",
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontFamily: 'AxiformaBold',
-                  fontSize: 10,
-                ),
-              ),
+              SectionLabel(text: "Geositi popolari", fontSize: 10),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -82,12 +70,10 @@ class _DashboardViewState extends State<DashboardView> {
                     ),
                   );
                 },
-                child: Text(
-                  "visualizza tutti",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.secondary,
-                  ),
+                child: SectionLabel(
+                  text: "visualizza tutti",
+                  fontSize: 10,
+                  color: AppColors.secondary,
                 ),
               ),
             ],

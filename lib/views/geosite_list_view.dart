@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/mock_data.dart';
 import 'package:geoesplora/theme/app_color.dart';
-import 'package:geoesplora/widgets/custom_app_bar.dart';
-import 'package:geoesplora/widgets/custom_search_bar.dart';
-import 'package:geoesplora/widgets/geosite_card.dart';
+import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
+import 'package:geoesplora/widgets/cards/geosite_card.dart';
+import 'package:geoesplora/widgets/texts/title_page.dart';
 
 class GeositeListView extends StatelessWidget {
   const GeositeListView({super.key});
@@ -14,11 +14,12 @@ class GeositeListView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: CustomAppBar(title: "I tuoi geositi"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: [
+            TitlePage(title: "I tuoi geositi"),
+
             const SizedBox(height: 20),
             CustomSearchBar(),
             const SizedBox(height: 20),

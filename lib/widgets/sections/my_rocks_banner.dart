@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/widgets/texts/title_page.dart';
 
 class MyRocksBanner extends StatelessWidget {
   final VoidCallback onCameraTap;
@@ -27,7 +28,7 @@ class MyRocksBanner extends StatelessWidget {
               onTap: onMyRockTap,
               behavior: HitTestBehavior.opaque,
               child: Container(
-                padding: const EdgeInsets.only(left: 35),
+                padding: const EdgeInsets.symmetric(horizontal: 50),
                 height: 76,
                 decoration: BoxDecoration(
                   color: AppColors.primary,
@@ -41,13 +42,7 @@ class MyRocksBanner extends StatelessWidget {
                       size: 28,
                     ),
                     const SizedBox(width: 15),
-                    Text(
-                      "Le mie rocce",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontSize: 20,
-                        fontFamily: 'AxiformaRegular',
-                      ),
-                    ),
+                    TitlePage(title: "Le mie rocce", size: 20),
                   ],
                 ),
               ),

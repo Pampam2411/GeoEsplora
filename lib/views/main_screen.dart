@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geoesplora/views/dashboard_view.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/views/rock_list_view.dart';
-import 'package:geoesplora/widgets/custom_bottom_nav.dart';
+import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});

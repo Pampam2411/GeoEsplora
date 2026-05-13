@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
-import 'package:geoesplora/widgets/custom_back_button.dart';
-import 'package:geoesplora/widgets/custom_bottom_nav.dart';
-import 'package:geoesplora/widgets/favorite_button.dart';
+import 'package:geoesplora/widgets/buttons/custom_back_button.dart';
+import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
+import 'package:geoesplora/widgets/buttons/favorite_button.dart';
+import 'package:geoesplora/widgets/texts/rock_subtitle.dart';
+import 'package:geoesplora/widgets/texts/rock_title.dart';
 
 class RockDetailScreen extends StatelessWidget {
   final Rock rock;
@@ -85,28 +87,12 @@ class RockDetailScreen extends StatelessWidget {
                     children: [
                       FittedBox(
                         fit: BoxFit.scaleDown,
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          rock.name.toUpperCase(),
-                          style: const TextStyle(
-                            color: AppColors.surface,
-                            fontSize: 48,
-                            fontFamily: 'AxiformaBlack',
-                            height: 1.0,
-                          ),
-                        ),
+                        child: RockTitle(text: rock.name.toUpperCase()),
                       ),
 
-                      Text(
+                      RockSubtitle(
                         textAlign: TextAlign.center,
-                        rock.type,
-                        style: const TextStyle(
-                          color: AppColors.surface,
-                          fontSize: 13,
-                          fontFamily: 'AxiformaBold',
-                          height: 1.0,
-                          letterSpacing: 1.2,
-                        ),
+                        text: rock.type,
                       ),
                     ],
                   ),

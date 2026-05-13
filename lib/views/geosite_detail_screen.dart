@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
-import 'package:geoesplora/widgets/custom_back_button.dart';
-import 'package:geoesplora/widgets/custom_bottom_nav.dart';
-import 'package:geoesplora/widgets/detaild_tab_bar.dart';
-import 'package:geoesplora/widgets/favorite_button.dart';
-import 'package:geoesplora/widgets/geosite_map_preview.dart';
-import 'package:geoesplora/widgets/geosite_quick_info.dart';
-import 'package:geoesplora/widgets/geosite_review_sheet.dart';
-import 'package:geoesplora/widgets/primary_button.dart';
-import 'package:geoesplora/widgets/review_badge.dart';
+import 'package:geoesplora/widgets/buttons/custom_back_button.dart';
+import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
+import 'package:geoesplora/widgets/navigations/detaild_tab_bar.dart';
+import 'package:geoesplora/widgets/buttons/favorite_button.dart';
+import 'package:geoesplora/widgets/sections/geosite_map_preview.dart';
+import 'package:geoesplora/widgets/sections/geosite_quick_info.dart';
+import 'package:geoesplora/widgets/sections/geosite_review_sheet.dart';
+import 'package:geoesplora/widgets/buttons/primary_button.dart';
+import 'package:geoesplora/widgets/indicators/review_badge.dart';
 import 'package:geoesplora/models/geosite.dart';
+import 'package:geoesplora/widgets/texts/card_subtitle.dart';
+import 'package:geoesplora/widgets/texts/card_title.dart';
+import 'package:geoesplora/widgets/texts/detail_text.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class GeositoDetailScreen extends StatefulWidget {
   final Geosite geosite;
@@ -84,21 +88,17 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                   ),
                 ),
                 Positioned(
-                  left: 20,
-                  right: 20,
+                  left: 44,
+                  right: 44,
                   bottom: 70,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FittedBox(
                         fit: BoxFit.scaleDown,
-                        child: Text(
-                          widget.geosite.name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: CardTitle(
+                          text: widget.geosite.name,
+                          fontSize: 32,
                         ),
                       ),
                       const SizedBox(height: 5),
@@ -112,13 +112,9 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
                           const SizedBox(width: 5),
                           FittedBox(
                             fit: BoxFit.scaleDown,
-                            child: Text(
-                              widget.geosite.location,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
+                            child: CardSubtitle(
+                              text: widget.geosite.location,
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -195,14 +191,8 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Dettagli",
-              style: TextStyle(
-                color: AppColors.textPrimary,
-                fontFamily: 'AxiformaBold',
-                fontSize: 14,
-              ),
-            ),
+            const SectionLabel(text: "Dettagli", fontSize: 14),
+
             ReviewBadge(
               reviewCount: widget.geosite.reviewCount,
               textColor: AppColors.secondary,
@@ -221,16 +211,8 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
         ),
         const SizedBox(height: 10),
 
-        Text(
-          widget.geosite.description,
-          style: const TextStyle(
-            color: AppColors.secondary,
-            fontFamily: 'AxiformaLight',
-            fontSize: 13,
-            height: 1.2,
-            letterSpacing: 0.2,
-          ),
-        ),
+        DetailText(text: widget.geosite.description),
+
         const SizedBox(height: 10),
 
         // LINK LEGGI E ACCESSIBILITÀ
@@ -238,41 +220,29 @@ class _GeositoDetailScreenState extends State<GeositoDetailScreen> {
           children: [
             GestureDetector(
               onTap: () => debugPrint("Espandi testo"),
-              child: const Text(
-                "Leggi di più",
-                style: TextStyle(
-                  color: AppColors.secondary,
-                  fontSize: 10,
-                  fontFamily: 'AxiformaBold',
-                  decoration: TextDecoration.underline,
-                ),
+              child: const SectionLabel(
+                text: "Leggi di più",
+                color: AppColors.secondary,
+                fontSize: 10,
+                decoration: TextDecoration.underline,
               ),
             ),
             const SizedBox(width: 20),
             GestureDetector(
               onTap: () => debugPrint("Apri accessibilità"),
-              child: const Text(
-                "Informazioni sull'accessibilità",
-                style: TextStyle(
-                  color: AppColors.secondary,
-                  fontSize: 10,
-                  fontFamily: 'AxiformaBold',
-                  decoration: TextDecoration.underline,
-                ),
+              child: const SectionLabel(
+                text: "Informazioni sull'accessibilità",
+                color: AppColors.secondary,
+                fontSize: 10,
+                decoration: TextDecoration.underline,
               ),
             ),
           ],
         ),
         const SizedBox(height: 20),
 
-        const Text(
-          "Immagini",
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontFamily: 'AxiformaBold',
-            fontSize: 14,
-          ),
-        ),
+        const SectionLabel(text: "Immagini", fontSize: 14),
+
         const SizedBox(height: 10),
         SizedBox(
           height: 100,
