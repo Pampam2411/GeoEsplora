@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key});
@@ -12,31 +13,47 @@ class CustomSearchBar extends StatefulWidget {
 class _CustomSearchBarState extends State<CustomSearchBar> {
   bool _isExpanded = false;
 
-  double _tempoDisponibile = 30;
-  bool _budgetBasso = false; // €
-  bool _budgetMedio = false; // €€
-  bool _budgetAlto = false; // €€€
-  final List<String> _distanzeSelezionate = [];
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _overlayEntry;
 
+  double _tempoDisponibile = 30;
+  bool _budgetBasso = false;
+  bool _budgetMedio = false;
+  bool _budgetAlto = false;
+  final List<String> _distanzeSelezionate = [];
   double _lunghezzaPercorso = 15;
   bool _accessibilita = false;
   final List<String> _categorieSelezionate = [];
 
+  @override
+  void dispose() {
+    _removeOverlay();
+    super.dispose();
+  }
+
   void _toggleFilters() {
+    if (_isExpanded) {
+      _removeOverlay();
+    } else {
+      _showOverlay();
+    }
     setState(() {
       _isExpanded = !_isExpanded;
     });
   }
 
+  void _updateState(VoidCallback fn) {
+    setState(fn);
+    _overlayEntry?.markNeedsBuild();
+  }
+
   void _eseguiRicerca() {
-    debugPrint(
-      "Ricerca avviata con: Tempo $_tempoDisponibile, budgetBasso= $_budgetBasso, budgetMedio=$_budgetMedio, budgetAlto=$_budgetAlto, Accessibilità: $_accessibilita",
-    );
+    debugPrint("Ricerca avviata...");
     _toggleFilters();
   }
 
   void _toggleListItem(List<String> list, String item, bool? isChecked) {
-    setState(() {
+    _updateState(() {
       if (isChecked == true) {
         list.add(item);
       } else {
@@ -45,78 +62,100 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final borderRadius = BorderRadius.only(
-      topLeft: const Radius.circular(10),
-      topRight: const Radius.circular(10),
-      bottomLeft: Radius.circular(_isExpanded ? 22 : 10),
-      bottomRight: Radius.circular(_isExpanded ? 22 : 10),
+  void _showOverlay() {
+    final overlay = Overlay.of(context);
+    final renderBox = context.findRenderObject() as RenderBox;
+    final size = renderBox.size;
+
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        width: size.width,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: Offset(0.0, size.height - 1),
+          child: Material(
+            elevation: 0.0,
+            color: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(22),
+                ),
+                border: const Border(
+                  left: BorderSide(color: AppColors.secondary, width: 1),
+                  right: BorderSide(color: AppColors.secondary, width: 1),
+                  bottom: BorderSide(color: AppColors.secondary, width: 1),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.15),
+                    blurRadius: 10,
+                    spreadRadius: -2,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.6,
+              ),
+              child: SingleChildScrollView(child: _buildFilterContent()),
+            ),
+          ),
+        ),
+      ),
     );
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      decoration: BoxDecoration(
-        color: AppColors.background,
-        borderRadius: borderRadius,
-        border: Border.all(color: AppColors.secondary, width: 1),
-      ),
+    overlay.insert(_overlayEntry!);
+  }
 
-      child: ClipRRect(
-        borderRadius: borderRadius,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            //BARRA RICERCA
-            SizedBox(
-              height: 42,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Cerca geosito...',
-                  hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.secondary,
-                    fontSize: 10,
-                    fontFamily: 'AxiformaRegular',
-                  ),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  contentPadding: const EdgeInsets.only(
-                    left: 23,
-                    right: 8,
-                    top: 6,
-                  ),
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
 
-                  suffixIcon: IconButton(
-                    icon: const FaIcon(
-                      FontAwesomeIcons.sliders,
-                      size: 18,
-                      color: AppColors.secondary,
-                    ),
-                    onPressed: _toggleFilters,
-                  ),
+  @override
+  Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.vertical(
+      top: const Radius.circular(10),
+      bottom: Radius.circular(_isExpanded ? 0 : 10),
+    );
+
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 100),
+        decoration: BoxDecoration(
+          color: AppColors.background,
+          borderRadius: borderRadius,
+
+          border: Border.all(color: AppColors.secondary, width: 1),
+        ),
+        child: SizedBox(
+          height: 42,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Cerca geosito...',
+              hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColors.secondary,
+                fontSize: 10,
+                fontFamily: 'AxiformaRegular',
+              ),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding: const EdgeInsets.only(left: 23, right: 8, top: 6),
+              suffixIcon: IconButton(
+                icon: const FaIcon(
+                  FontAwesomeIcons.sliders,
+                  size: 18,
+                  color: AppColors.secondary,
                 ),
+                onPressed: _toggleFilters,
               ),
             ),
-
-            //AREA FILTRI
-            AnimatedSize(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              alignment: Alignment.topCenter,
-              child: _isExpanded
-                  ? ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height * 0.6,
-                      ),
-                      child: SingleChildScrollView(
-                        child: _buildFilterContent(),
-                      ),
-                    )
-                  : const SizedBox(width: double.infinity, height: 0),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -128,7 +167,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //SLIDER TEMPO
           _buildSectionTitle('Tempo disponibile (minuti)'),
           Slider(
             value: _tempoDisponibile,
@@ -138,31 +176,35 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             label: _tempoDisponibile >= 60
                 ? '60+'
                 : _tempoDisponibile.toInt().toString(),
-            onChanged: (val) => setState(() => _tempoDisponibile = val),
+            onChanged: (val) => _updateState(() => _tempoDisponibile = val),
           ),
 
-          //BUDGET
           _buildSectionTitle('Budget stimato'),
           Padding(
             padding: const EdgeInsets.only(bottom: 10.0),
             child: Row(
               children: [
-                _buildBudgetCheckbox('€', _budgetBasso, (val) {
-                  setState(() => _budgetBasso = val ?? false);
-                }),
+                _buildBudgetCheckbox(
+                  '€',
+                  _budgetBasso,
+                  (val) => _updateState(() => _budgetBasso = val ?? false),
+                ),
                 const SizedBox(width: 20),
-                _buildBudgetCheckbox('€€', _budgetMedio, (val) {
-                  setState(() => _budgetMedio = val ?? false);
-                }),
+                _buildBudgetCheckbox(
+                  '€€',
+                  _budgetMedio,
+                  (val) => _updateState(() => _budgetMedio = val ?? false),
+                ),
                 const SizedBox(width: 20),
-                _buildBudgetCheckbox('€€€', _budgetAlto, (val) {
-                  setState(() => _budgetAlto = val ?? false);
-                }),
+                _buildBudgetCheckbox(
+                  '€€€',
+                  _budgetAlto,
+                  (val) => _updateState(() => _budgetAlto = val ?? false),
+                ),
               ],
             ),
           ),
 
-          //DISTANZA/AREA GEOGRAFICA
           _buildSectionTitle('Distanza / area geografica'),
           _buildCheckboxGrid([
             'Vicino a me',
@@ -173,7 +215,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             'Vibo Valentia',
           ], _distanzeSelezionate),
 
-          //LUNGHEZZA PERCORSO
           _buildSectionTitle('Lunghezza percorso massimo (km)'),
           Slider(
             value: _lunghezzaPercorso,
@@ -183,10 +224,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             label: _lunghezzaPercorso >= 60
                 ? '60+'
                 : _lunghezzaPercorso.toInt().toString(),
-            onChanged: (val) => setState(() => _lunghezzaPercorso = val),
+            onChanged: (val) => _updateState(() => _lunghezzaPercorso = val),
           ),
 
-          //ACCESSIBILITA
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -194,12 +234,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               Switch(
                 value: _accessibilita,
                 activeThumbColor: AppColors.secondary,
-                onChanged: (val) => setState(() => _accessibilita = val),
+                onChanged: (val) => _updateState(() => _accessibilita = val),
               ),
             ],
           ),
 
-          //CATEGORIE INTERESSE
           _buildSectionTitle('Categoria di interesse'),
           _buildCheckboxGrid([
             'Geologico',
@@ -210,7 +249,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             'Naturalistico',
           ], _categorieSelezionate),
 
-          //PULSANTE CERCA
           Center(
             child: SizedBox(
               width: 89,
@@ -238,15 +276,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 5),
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontFamily: 'AxiformaBold',
-          fontSize: 13,
-          color: AppColors.textPrimary,
-          letterSpacing: 0.26,
-        ),
-      ),
+      child: SectionLabel(text: title, fontSize: 13),
     );
   }
 
@@ -318,15 +348,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           ),
         ),
         const SizedBox(width: 6),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.secondary,
-            fontFamily: 'AxiformaBold',
-            fontSize: 11,
-            letterSpacing: 0.2,
-          ),
-        ),
+        SectionLabel(text: label, color: AppColors.secondary, fontSize: 11),
       ],
     );
   }
