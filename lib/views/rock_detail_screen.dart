@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
-import 'package:geoesplora/widgets/buttons/custom_back_button.dart';
-import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
-import 'package:geoesplora/widgets/buttons/favorite_button.dart';
+import 'package:geoesplora/widgets/navigations/back_favorite_button.dart';
 import 'package:geoesplora/widgets/texts/rock_subtitle.dart';
 import 'package:geoesplora/widgets/texts/rock_title.dart';
 
@@ -50,37 +48,12 @@ class RockDetailScreen extends StatelessWidget {
                   ),
                 ),
 
-                // Pulsanti Indietro e Preferiti
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 8.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: const CustomBackButton(),
-                        ),
+                const BackFavoriteButton(),
 
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: const FavoriteButton(
-                            isInitiallyFavorite: false,
-                            size: 36,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 Positioned(
                   left: 44,
                   right: 44,
-                  top: 80,
+                  top: 90,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,

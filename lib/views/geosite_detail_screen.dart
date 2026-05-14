@@ -3,10 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
-import 'package:geoesplora/widgets/buttons/custom_back_button.dart';
+import 'package:geoesplora/widgets/navigations/back_favorite_button.dart';
 import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/navigations/detaild_tab_bar.dart';
-import 'package:geoesplora/widgets/buttons/favorite_button.dart';
 import 'package:geoesplora/widgets/sections/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/sections/geosite_quick_info.dart';
 import 'package:geoesplora/widgets/sections/geosite_review_sheet.dart';
@@ -71,25 +70,8 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
                   ),
                 ),
 
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 10.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const CustomBackButton(),
-                        const FavoriteButton(
-                          isInitiallyFavorite: false,
-                          size: 36,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const BackFavoriteButton(),
+
                 Positioned(
                   left: 46,
                   right: 46,
@@ -175,7 +157,7 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
       bottomNavigationBar: CustomBottomNav(
         currentIndex: currentIndex,
         onTap: (index) {
-          ref.read(bottomNavIndexProvider.notifier).state = index;
+          ref.read(bottomNavIndexProvider.notifier).changePage(index);
           Navigator.of(context).popUntil((route) => route.isFirst);
         },
       ),

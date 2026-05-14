@@ -5,7 +5,7 @@ class MockData {
   static final List<Rock> mockRocks = [
     Rock(
       id: 'r1',
-      name: 'Granito Sila',
+      name: 'Granito',
       type: 'Ignea Intrusiva',
       imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b',
       geologicalEra: 'Paleozoico',

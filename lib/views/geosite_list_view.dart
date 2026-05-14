@@ -54,7 +54,7 @@ class GeositeListView extends ConsumerWidget {
       bottomNavigationBar: CustomBottomNav(
         currentIndex: currentIndex,
         onTap: (index) {
-          ref.read(bottomNavIndexProvider.notifier).state = index;
+          ref.read(bottomNavIndexProvider.notifier).changePage(index);
           Navigator.of(context).popUntil((route) => route.isFirst);
         },
       ),
