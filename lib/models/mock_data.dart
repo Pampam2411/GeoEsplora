@@ -14,6 +14,13 @@ class MockData {
       density: 7.0,
       porosity: 15,
       resistence: 250,
+      recognitionImages: [
+        'assets/images/granito1.jpg',
+        'assets/images/granito2.jpg',
+        'assets/images/granito3.jpg',
+        'assets/images/granito1.jpg',
+        'assets/images/granito2.jpg',
+      ],
     ),
     Rock(
       id: 'r2',
@@ -44,6 +51,12 @@ class MockData {
       price: '€ 15',
       isAccessible: false,
       rockIds: ['r2'],
+      galleryImages: [
+        'assets/images/foto1.jpg',
+        'assets/images/foto2.jpg',
+        'assets/images/foto1.jpg',
+        'assets/images/foto1.jpg',
+      ],
     ),
     Geosite(
       id: 'g2',

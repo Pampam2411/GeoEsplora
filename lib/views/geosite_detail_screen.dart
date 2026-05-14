@@ -12,6 +12,7 @@ import 'package:geoesplora/widgets/sections/geosite_review_sheet.dart';
 import 'package:geoesplora/widgets/buttons/primary_button.dart';
 import 'package:geoesplora/widgets/indicators/review_badge.dart';
 import 'package:geoesplora/models/geosite.dart';
+import 'package:geoesplora/widgets/sections/horizontal_image_list.dart';
 import 'package:geoesplora/widgets/texts/card_subtitle.dart';
 import 'package:geoesplora/widgets/texts/card_title.dart';
 import 'package:geoesplora/widgets/texts/detail_text.dart';
@@ -235,29 +236,10 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
         const SectionLabel(text: "Immagini", fontSize: 14),
 
         const SizedBox(height: 10),
-        SizedBox(
-          height: 100,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return Container(
-                width: 140,
-                margin: const EdgeInsets.only(right: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey.shade300,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    'https://images.unsplash.com/photo-1542224566-6e85f2e6772f',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              );
-            },
-          ),
+
+        HorizontalImageList(
+          images: widget.geosite.galleryImages,
+          warningMessage: "Non sono presenti foto per questo geosito.",
         ),
 
         const SizedBox(height: 20),

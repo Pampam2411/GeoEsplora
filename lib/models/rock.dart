@@ -8,6 +8,7 @@ class Rock {
   final double porosity;
   final double resistence;
   final double density;
+  final List<String>? recognitionImages;
 
   Rock({
     required this.id,
@@ -19,5 +20,6 @@ class Rock {
     required this.density,
     required this.porosity,
     required this.resistence,
+    this.recognitionImages,
   });
 }

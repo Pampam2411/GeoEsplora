@@ -11,6 +11,7 @@ class Geosite {
   final String price;
   final bool isAccessible;
   final List<String> rockIds;
+  final List<String>? galleryImages;
 
   Geosite({
     required this.id,
@@ -25,6 +26,7 @@ class Geosite {
     required this.price,
     required this.isAccessible,
     this.rockIds = const [],
+    this.galleryImages,
   });
 
   Geosite copyWith({
