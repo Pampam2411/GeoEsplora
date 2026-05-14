@@ -14,55 +14,62 @@ class CustomBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calcoliamo una proporzione per l'altezza totale (barra + sporgenza)
-    final totalHeight = MediaQuery.sizeOf(context).height * 0.12;
-
+    const double navBarHeight = 65.0;
+    const double totalHeight = 100.0;
     return SizedBox(
       height: totalHeight,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: AppColors.secondary,
-            selectedItemColor: AppColors.surface,
-            unselectedItemColor: AppColors.surface,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            currentIndex: currentIndex,
-            onTap: onTap,
-            items: [
-              const BottomNavigationBarItem(
-                label: 'Home',
-                icon: FaIcon(FontAwesomeIcons.house),
-              ),
-              const BottomNavigationBarItem(
-                label: 'Mappa',
-                icon: FaIcon(FontAwesomeIcons.map),
-              ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SizedBox(
+              height: navBarHeight,
+              child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: AppColors.secondary,
+                selectedItemColor: AppColors.surface,
+                unselectedItemColor: AppColors.surface,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                currentIndex: currentIndex,
+                onTap: onTap,
+                items: [
+                  const BottomNavigationBarItem(
+                    label: 'Home',
+                    icon: FaIcon(FontAwesomeIcons.house),
+                  ),
+                  const BottomNavigationBarItem(
+                    label: 'Mappa',
+                    icon: FaIcon(FontAwesomeIcons.map),
+                  ),
 
-              const BottomNavigationBarItem(
-                label: '',
-                icon: SizedBox(width: 40),
-              ),
+                  const BottomNavigationBarItem(
+                    label: '',
+                    icon: SizedBox(width: 40),
+                  ),
 
-              const BottomNavigationBarItem(
-                label: 'Rocce',
-                icon: FaIcon(FontAwesomeIcons.mountain),
+                  const BottomNavigationBarItem(
+                    label: 'Rocce',
+                    icon: FaIcon(FontAwesomeIcons.mountain),
+                  ),
+                  const BottomNavigationBarItem(
+                    label: 'Profilo',
+                    icon: FaIcon(FontAwesomeIcons.user),
+                  ),
+                ],
               ),
-              const BottomNavigationBarItem(
-                label: 'Profilo',
-                icon: FaIcon(FontAwesomeIcons.user),
-              ),
-            ],
+            ),
           ),
 
           Positioned(
-            top: 20,
+            top: 5,
             child: GestureDetector(
               onTap: () => onTap(2),
               child: Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColors.secondary,
                   shape: BoxShape.circle,

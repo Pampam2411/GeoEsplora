@@ -112,7 +112,6 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                 height: 300,
                 width: 279,
                 child: CardSwiper(
-                  showBackCardOnUndo: true,
                   scale: 0.9,
                   cardsCount: geositi.length,
                   isLoop: true,

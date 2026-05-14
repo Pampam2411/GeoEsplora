@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/widgets/navigations/back_favorite_button.dart';
+import 'package:geoesplora/widgets/sections/horizontal_image_list.dart';
+import 'package:geoesplora/widgets/texts/detail_text.dart';
 import 'package:geoesplora/widgets/texts/rock_subtitle.dart';
 import 'package:geoesplora/widgets/texts/rock_title.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class RockDetailScreen extends StatelessWidget {
   final Rock rock;
@@ -131,24 +134,20 @@ class RockDetailScreen extends StatelessWidget {
                           const SizedBox(height: 16),
 
                           // DESCRIZIONE
-                          Text(
-                            rock.description,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: AppColors.rockCardDetail,
-                              height: 1.0,
-                              fontFamily: 'AxiformaLight',
-                            ),
+                          DetailText(
+                            text: rock.description,
+                            size: 13,
+                            color: AppColors.rockCardDetail,
+                            lineHeight: 1.0,
                           ),
                           const SizedBox(height: 16),
-                          Text(
-                            "Riconoscimenti",
-                            style: TextStyle(
-                              fontFamily: 'AxiformaBold',
-                              fontSize: 14,
-                              height: 1.0,
-                              letterSpacing: 0.2,
-                            ),
+
+                          SectionLabel(text: "Riconoscimenti", fontSize: 14),
+
+                          HorizontalImageList(
+                            images: rock.recognitionImages ?? [],
+                            warningMessage:
+                                "Non sono presenti foto per questa roccia",
                           ),
                         ],
                       ),
@@ -179,13 +178,10 @@ class RockDetailScreen extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 32,
-                    color: AppColors.rockCardDetail,
-                    fontFamily: 'AxiformaBlack',
-                  ),
+                RockTitle(
+                  text: value,
+                  fontSize: 32,
+                  color: AppColors.rockCardDetail,
                 ),
 
                 const SizedBox(width: 4),
@@ -193,36 +189,27 @@ class RockDetailScreen extends StatelessWidget {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text(
-                            "g",
-                            style: TextStyle(
-                              fontFamily: 'AxiformaLight',
-                              fontSize: 10,
-                              color: AppColors.rockCardDetail,
-                              height: 1.0,
-                            ),
+                          DetailText(
+                            text: "g",
+                            size: 10,
+                            color: AppColors.rockCardDetail,
+                            lineHeight: 1.0,
                           ),
                           SizedBox(height: 4),
-                          Text(
-                            "cm³",
-                            style: TextStyle(
-                              fontFamily: 'AxiformaLight',
-                              fontSize: 10,
-                              color: AppColors.rockCardDetail,
-                              height: 1.0,
-                            ),
+                          DetailText(
+                            text: "cm³",
+                            size: 10,
+                            color: AppColors.rockCardDetail,
+                            lineHeight: 1.0,
                           ),
                         ],
                       )
                     : Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
-                        child: Text(
-                          unit,
-                          style: TextStyle(
-                            fontSize: unit == '%' ? 20 : 13,
-                            color: AppColors.rockCardDetail,
-                            fontFamily: 'AxiformaLight',
-                          ),
+                        child: DetailText(
+                          text: unit,
+                          size: unit == '%' ? 20 : 13,
+                          color: AppColors.rockCardDetail,
                         ),
                       ),
               ],
@@ -231,13 +218,10 @@ class RockDetailScreen extends StatelessWidget {
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.center,
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                color: AppColors.rockCardDetail,
-                fontFamily: 'AxiformaBlack',
-              ),
+            child: RockTitle(
+              text: title,
+              fontSize: 16,
+              color: AppColors.rockCardDetail,
             ),
           ),
         ],
