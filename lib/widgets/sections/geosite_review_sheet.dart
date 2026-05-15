@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoesplora/widgets/texts/detail_text.dart';
+import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class GeositeReviewsSheet extends StatelessWidget {
   final Geosite geosite;
@@ -43,15 +45,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      geosite.name,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontFamily: 'AxiformaBold',
-                        fontSize: 32,
-                        letterSpacing: 0.2,
-                      ),
-                    ),
+                    SectionLabel(text: geosite.name, fontSize: 32),
                     const SizedBox(height: 4),
                     Row(
                       children: [
@@ -61,15 +55,11 @@ class GeositeReviewsSheet extends StatelessWidget {
                           color: AppColors.textPrimary,
                         ),
                         const SizedBox(width: 8),
-                        Text(
-                          geosite.location,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                color: AppColors.textPrimary,
-                                fontFamily: 'AxiformaLight',
-                                fontSize: 24,
-                                letterSpacing: 0.2,
-                              ),
+                        DetailText(
+                          text: geosite.location,
+                          color: AppColors.textPrimary,
+                          size: 24,
+                          letterSpacing: 0.2,
                         ),
                       ],
                     ),
@@ -77,16 +67,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Recensioni",
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(
-                                fontSize: 14,
-                                fontFamily: 'AxiformaBold',
-                                letterSpacing: 0.2,
-                                color: AppColors.textPrimary,
-                              ),
-                        ),
+                        SectionLabel(text: "Recensioni", fontSize: 14),
                         GestureDetector(
                           onTap: () {
                             debugPrint("Apri filtri recensioni");
@@ -108,7 +89,7 @@ class GeositeReviewsSheet extends StatelessWidget {
                 child: ListView.builder(
                   controller: scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  itemCount: 5, // Numero di recensioni (placeholder)
+                  itemCount: 5,
                   itemBuilder: (context, index) {
                     return _buildReviewItem();
                   },
@@ -145,45 +126,38 @@ class GeositeReviewsSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultrices lorem in nunc maximus semper.",
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 11,
-                    height: 1.2,
-                    fontFamily: 'AxiformaLight',
-                  ),
+                const DetailText(
+                  text:
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultrices lorem in nunc maximus semper.",
+
+                  color: AppColors.textPrimary,
+                  size: 11,
+                  lineHeight: 1.2,
                 ),
                 const SizedBox(height: 8),
 
                 Row(
                   children: [
-                    const Text(
-                      "Giuseppe De Marco",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 11,
-                        fontFamily: 'AxiformaLight',
-                      ),
+                    const DetailText(
+                      text: "Giuseppe De Marco",
+
+                      color: Colors.grey,
+                      size: 11,
                     ),
                     const SizedBox(width: 12),
                     FaIcon(FontAwesomeIcons.star, size: 14, color: Colors.grey),
-                    const Text(
-                      " 4.8",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 11,
-                        fontFamily: 'AxiformaLight',
-                      ),
+                    const DetailText(
+                      text: " 4.8",
+
+                      color: Colors.grey,
+                      size: 11,
                     ),
                     const SizedBox(width: 12),
-                    const Text(
-                      "11:36 25/02/2026",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 11,
-                        fontFamily: 'AxiformaLight',
-                      ),
+                    const DetailText(
+                      text: "11:36 25/02/2026",
+
+                      color: Colors.grey,
+                      size: 11,
                     ),
                   ],
                 ),

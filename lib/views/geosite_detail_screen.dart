@@ -6,6 +6,8 @@ import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/widgets/navigations/back_favorite_button.dart';
 import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/navigations/detaild_tab_bar.dart';
+import 'package:geoesplora/widgets/sections/geosite_accesibility_sheet.dart';
+import 'package:geoesplora/widgets/sections/geosite_detail_more_sheet.dart';
 import 'package:geoesplora/widgets/sections/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/sections/geosite_quick_info.dart';
 import 'package:geoesplora/widgets/sections/geosite_review_sheet.dart';
@@ -211,7 +213,16 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
         Row(
           children: [
             GestureDetector(
-              onTap: () => debugPrint("Espandi testo"),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) =>
+                      GeositeDetailMoreSheet(geosite: widget.geosite),
+                );
+              },
+
               child: const SectionLabel(
                 text: "Leggi di più",
                 color: AppColors.secondary,
@@ -221,7 +232,15 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
             ),
             const SizedBox(width: 20),
             GestureDetector(
-              onTap: () => debugPrint("Apri accessibilità"),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) =>
+                      GeositeAccesibilitySheet(geosite: widget.geosite),
+                );
+              },
               child: const SectionLabel(
                 text: "Informazioni sull'accessibilità",
                 color: AppColors.secondary,
