@@ -41,9 +41,7 @@ class RockCard extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(
-                      alpha: 0.7,
-                    ), // Sfumatura leggermente più corta
+                    Colors.black.withValues(alpha: 0.7),
                   ],
                 ),
               ),

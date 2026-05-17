@@ -61,7 +61,7 @@ class GeositeAccesibilitySheet extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 14),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -70,9 +70,13 @@ class GeositeAccesibilitySheet extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 14),
 
-                    DetailText(text: geosite.description),
+                    _buildInfo('Fondo', geosite.surface),
+                    _buildInfo('Percorso', geosite.route),
+                    _buildInfo('Pendenza', geosite.slope),
+                    _buildInfo('Gradini', geosite.steps),
+                    _buildInfo('Carrozzina', geosite.wheelchair),
                   ],
                 ),
               ),
@@ -80,6 +84,16 @@ class GeositeAccesibilitySheet extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildInfo(String type, String description) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SectionLabel(text: "$type: ", fontSize: 13, color: AppColors.secondary),
+        DetailText(text: description, color: AppColors.secondary),
+      ],
     );
   }
 }

@@ -205,7 +205,7 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
         ),
         const SizedBox(height: 10),
 
-        DetailText(text: widget.geosite.description),
+        DetailText(text: getShortDescription(widget.geosite.description, 20)),
 
         const SizedBox(height: 10),
 
@@ -300,5 +300,13 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
         ),
       ],
     );
+  }
+
+  String getShortDescription(String text, int limit) {
+    List<String> words = text.split(' ');
+    if (words.length <= limit) {
+      return text;
+    }
+    return '${words.take(limit).join(' ')}...';
   }
 }

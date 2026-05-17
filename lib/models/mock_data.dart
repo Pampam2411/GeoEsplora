@@ -57,6 +57,11 @@ class MockData {
         'assets/images/foto1.jpg',
         'assets/images/foto1.jpg',
       ],
+      surface: 'sterrato',
+      route: 'alcuni tratti sconnessi',
+      slope: 'brevi salite',
+      steps: 'assenti nel primo tratto',
+      wheelchair: 'non consigliato senza supporto',
     ),
     Geosite(
       id: 'g2',
@@ -72,6 +77,11 @@ class MockData {
       price: 'Gratis',
       isAccessible: true,
       rockIds: ['r1'],
+      surface: 'sterrato',
+      route: 'alcuni tratti sconnessi',
+      slope: 'brevi salite',
+      steps: 'assenti nel primo tratto',
+      wheelchair: 'non consigliato senza supporto',
     ),
     Geosite(
       id: 'g3',
@@ -87,6 +97,11 @@ class MockData {
       price: '€ 8',
       isAccessible: false,
       rockIds: ['r2'],
+      surface: 'sterrato',
+      route: 'alcuni tratti sconnessi',
+      slope: 'brevi salite',
+      steps: 'assenti nel primo tratto',
+      wheelchair: 'non consigliato senza supporto',
     ),
   ];
 }

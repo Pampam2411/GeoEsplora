@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/widgets/cards/rock_card_circle.dart';
 import 'package:geoesplora/widgets/navigations/back_favorite_button.dart';
 import 'package:geoesplora/widgets/sections/horizontal_image_list.dart';
 import 'package:geoesplora/widgets/texts/detail_text.dart';
@@ -26,7 +27,7 @@ class RockDetailScreen extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: screenHeight * 0.45,
+            height: screenHeight * 0.55,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -79,82 +80,101 @@ class RockDetailScreen extends StatelessWidget {
 
           // 2. PANNELLO DETTAGLI BIANCO
           Positioned(
-            top: screenHeight * 0.42,
+            top: screenHeight * 0.35,
             left: 0,
             right: 0,
             bottom: 0,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 35.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 20),
-                          // RIGA INFO
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.surface,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(40),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: _buildInfo(
-                                  "Densitá",
-                                  rock.density % 1 == 0
-                                      ? rock.density.toInt().toString()
-                                      : rock.density.toString(),
-                                  "g/cm^3",
-                                ),
+                              const SizedBox(height: 40),
+                              // RIGA INFO
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: _buildInfo(
+                                      "Densitá",
+                                      rock.density % 1 == 0
+                                          ? rock.density.toInt().toString()
+                                          : rock.density.toString(),
+                                      "g/cm^3",
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: _buildInfo(
+                                      "Porositá",
+                                      rock.porosity % 1 == 0
+                                          ? rock.porosity.toInt().toString()
+                                          : rock.porosity.toString(),
+                                      "%",
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: _buildInfo(
+                                      "Resistenza",
+                                      rock.resistence % 1 == 0
+                                          ? rock.resistence.toInt().toString()
+                                          : rock.resistence.toString(),
+                                      "MPA",
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: _buildInfo(
-                                  "Porositá",
-                                  rock.porosity % 1 == 0
-                                      ? rock.porosity.toInt().toString()
-                                      : rock.porosity.toString(),
-                                  "%",
-                                ),
+
+                              const SizedBox(height: 16),
+
+                              // DESCRIZIONE
+                              DetailText(
+                                text: rock.description,
+                                size: 13,
+                                color: AppColors.rockCardDetail,
+                                lineHeight: 1.0,
                               ),
-                              Expanded(
-                                child: _buildInfo(
-                                  "Resistenza",
-                                  rock.resistence % 1 == 0
-                                      ? rock.resistence.toInt().toString()
-                                      : rock.resistence.toString(),
-                                  "MPA",
-                                ),
+                              const SizedBox(height: 16),
+
+                              SectionLabel(
+                                text: "Riconoscimenti",
+                                fontSize: 14,
+                              ),
+
+                              HorizontalImageList(
+                                images: rock.recognitionImages ?? [],
+                                warningMessage:
+                                    "Non sono presenti foto per questa roccia",
                               ),
                             ],
                           ),
-
-                          const SizedBox(height: 16),
-
-                          // DESCRIZIONE
-                          DetailText(
-                            text: rock.description,
-                            size: 13,
-                            color: AppColors.rockCardDetail,
-                            lineHeight: 1.0,
-                          ),
-                          const SizedBox(height: 16),
-
-                          SectionLabel(text: "Riconoscimenti", fontSize: 14),
-
-                          HorizontalImageList(
-                            images: rock.recognitionImages ?? [],
-                            warningMessage:
-                                "Non sono presenti foto per questa roccia",
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                //CARD ROCCIA CIRCOLARE
+                Positioned(
+                  top: -55,
+                  right: 0,
+                  left: 0,
+                  child: RockCardCircle(image: rock.imageUrl),
+                ),
+              ],
             ),
           ),
         ],

@@ -1,14 +1,19 @@
 class Geosite {
-  final String id;
-  final String name;
-  final String location;
-  final String imageUrl;
+  final String id,
+      name,
+      location,
+      imageUrl,
+      description,
+      duration,
+      distance,
+      price,
+      surface,
+      route,
+      slope,
+      steps,
+      wheelchair;
   final double rating;
   final int reviewCount;
-  final String description;
-  final String duration;
-  final String distance;
-  final String price;
   final bool isAccessible;
   final List<String> rockIds;
   final List<String>? galleryImages;
@@ -25,6 +30,12 @@ class Geosite {
     required this.distance,
     required this.price,
     required this.isAccessible,
+    required this.surface,
+    required this.route,
+    required this.slope,
+    required this.steps,
+    required this.wheelchair,
+
     this.rockIds = const [],
     this.galleryImages,
   });
@@ -41,6 +52,11 @@ class Geosite {
     String? distance,
     String? price,
     bool? isAccessible,
+    String? route,
+    String? surface,
+    String? slope,
+    String? steps,
+    String? wheelchair,
     List<String>? rockIds,
   }) {
     return Geosite(
@@ -56,6 +72,11 @@ class Geosite {
       price: price ?? this.price,
       isAccessible: isAccessible ?? this.isAccessible,
       rockIds: rockIds ?? this.rockIds,
+      route: route ?? this.route,
+      slope: slope ?? this.slope,
+      surface: surface ?? this.surface,
+      steps: steps ?? this.steps,
+      wheelchair: wheelchair ?? this.wheelchair,
     );
   }
 }
