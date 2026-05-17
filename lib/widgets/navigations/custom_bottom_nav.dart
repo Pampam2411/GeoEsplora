@@ -73,20 +73,21 @@ class CustomBottomNav extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.secondary,
                   shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.secondary.withValues(alpha: 0.3),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.all(14),
                   decoration: BoxDecoration(
                     color: Color(0xFF9F988E),
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
+
                   child: FaIcon(
                     FontAwesomeIcons.camera,
                     color: AppColors.surface,
