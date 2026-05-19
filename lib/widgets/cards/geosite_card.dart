@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/views/geosite_detail_screen.dart';
+import 'package:geoesplora/widgets/utils/fade_gradient.dart';
 import 'package:geoesplora/widgets/buttons/favorite_button.dart';
 import 'package:geoesplora/widgets/sections/geosite_review_sheet.dart';
 import 'package:geoesplora/widgets/indicators/review_badge.dart';
@@ -65,19 +66,11 @@ class GeositeCard extends StatelessWidget {
                 ),
               ),
 
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withValues(alpha: 0.1),
-                      Colors.black.withValues(alpha: 0.8),
-                    ],
-                    stops: const [0.0, 0.5, 1.0],
-                  ),
-                ),
+              FadeGradient.single(
+                color: Colors.black87.withValues(alpha: 0.6),
+                height: 120,
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
               ),
 
               Padding(

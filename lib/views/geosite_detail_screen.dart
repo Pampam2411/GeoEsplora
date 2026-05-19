@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
+import 'package:geoesplora/widgets/utils/fade_gradient.dart';
 import 'package:geoesplora/widgets/navigations/back_favorite_button.dart';
 import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/navigations/detaild_tab_bar.dart';
@@ -58,21 +59,14 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
                   ),
                 ),
 
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.black.withValues(alpha: 0.4),
-                        Colors.transparent,
-                        Colors.black.withValues(alpha: 0.8),
-                      ],
-                      stops: const [0.0, 0.5, 1.0],
-                    ),
-                  ),
+                FadeGradient(
+                  colors: [
+                    Colors.black.withValues(alpha: 0.25),
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.60),
+                  ],
+                  stops: const [0.0, 0.35, 1.0],
                 ),
-
                 const BackFavoriteButton(),
 
                 Positioned(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/rock.dart';
 import 'package:geoesplora/views/rock_detail_screen.dart';
+import 'package:geoesplora/widgets/utils/fade_gradient.dart';
 import 'package:geoesplora/widgets/buttons/favorite_button.dart';
 import 'package:geoesplora/widgets/texts/card_subtitle.dart';
 import 'package:geoesplora/widgets/texts/card_title.dart';
@@ -34,17 +35,11 @@ class RockCard extends StatelessWidget {
               ),
             ),
 
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withValues(alpha: 0.7),
-                  ],
-                ),
-              ),
+            FadeGradient.single(
+              color: Colors.black87.withValues(alpha: 0.6),
+              height: 120,
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
             ),
 
             Padding(
