@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/map_viewmodel.dart';
+import 'package:geoesplora/widgets/sections/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/utils/fade_gradient.dart';
 import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
-class MapView extends StatefulWidget {
+class MapView extends ConsumerStatefulWidget {
   const MapView({super.key});
   @override
-  State<StatefulWidget> createState() => _MapViewState();
+  ConsumerState<MapView> createState() => _MapViewState();
 }
 
-class _MapViewState extends State<MapView> {
+class _MapViewState extends ConsumerState<MapView> {
   late final MapViewModel _viewModel;
 
   @override
@@ -28,19 +31,33 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<LatLng?>(targetMapLocationProvider, (previous, next) {
+      if (next != null) {
+        _viewModel.mapController.move(next, 16.0);
+
+        ref.read(targetMapLocationProvider.notifier).state = null;
+      }
+    });
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: _viewModel.initialCameraPosition,
-            onMapCreated: _viewModel.onMapCreated,
-            zoomControlsEnabled: false,
-            myLocationButtonEnabled: false,
-            compassEnabled: true,
-            mapToolbarEnabled: false,
+          FlutterMap(
+            mapController: _viewModel.mapController,
+            options: MapOptions(
+              initialCenter: _viewModel.initialCenter,
+              initialZoom: _viewModel.initialZoom,
+              interactionOptions: const InteractionOptions(
+                flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+              ),
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.example.geoesplora',
+              ),
+            ],
           ),
-
           Positioned(
             top: 0,
             left: 0,

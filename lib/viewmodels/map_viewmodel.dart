@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class MapViewModel extends ChangeNotifier {
-  GoogleMapController? _mapController;
+  final MapController mapController = MapController();
 
-  final CameraPosition initialCameraPosition = const CameraPosition(
-    target: LatLng(39.3592, 16.2263),
-    zoom: 9.0,
-  );
-
-  bool get isMapReady => _mapController != null;
-
-  void onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
-    notifyListeners();
-  }
+  final LatLng initialCenter = const LatLng(39.3592, 16.2263);
+  final double initialZoom = 9.0;
 
   void resetCamera() {
-    _mapController?.animateCamera(
-      CameraUpdate.newCameraPosition(initialCameraPosition),
-    );
+    mapController.move(initialCenter, initialZoom);
   }
 
   @override
   void dispose() {
-    _mapController?.dispose();
+    mapController.dispose();
     super.dispose();
   }
 }

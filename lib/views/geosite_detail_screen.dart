@@ -257,7 +257,10 @@ class _GeositoDetailScreenState extends ConsumerState<GeositoDetailScreen> {
 
         const SizedBox(height: 20),
         // Mappa
-        const GeositeMapPreview(),
+        GeositeMapPreview(
+          latitude: widget.geosite.latitude,
+          longitude: widget.geosite.longitude,
+        ),
 
         const SizedBox(height: 30),
 

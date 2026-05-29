@@ -12,7 +12,7 @@ class Geosite {
       slope,
       steps,
       wheelchair;
-  final double rating;
+  final double rating, latitude, longitude;
   final int reviewCount;
   final bool isAccessible;
   final List<String> rockIds;
@@ -22,6 +22,8 @@ class Geosite {
     required this.id,
     required this.name,
     required this.location,
+    required this.latitude,
+    required this.longitude,
     required this.imageUrl,
     required this.rating,
     required this.reviewCount,
@@ -44,6 +46,8 @@ class Geosite {
     String? id,
     String? name,
     String? location,
+    double? latitude,
+    double? longitude,
     String? imageUrl,
     double? rating,
     int? reviewCount,
@@ -63,6 +67,8 @@ class Geosite {
       id: id ?? this.id,
       name: name ?? this.name,
       location: location ?? this.location,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
       imageUrl: imageUrl ?? this.imageUrl,
       rating: rating ?? this.rating,
       reviewCount: reviewCount ?? this.reviewCount,
