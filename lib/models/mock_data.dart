@@ -41,6 +41,9 @@ class MockData {
       id: 'g1',
       name: 'Grotte di Frasassi (Calabrese)',
       location: 'Cosenza, Calabria',
+      latitude: 39.3592,
+      longitude: 16.2263,
+
       imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b',
       rating: 4.8,
       reviewCount: 143,
@@ -67,6 +70,8 @@ class MockData {
       id: 'g2',
       name: 'Pietra dell\'Incudine',
       location: 'Reggio Calabria, Calabria',
+      latitude: 39.3592,
+      longitude: 16.2263,
       imageUrl: 'https://images.unsplash.com/photo-1524661135-423995f22d0b',
       rating: 4.5,
       reviewCount: 89,
@@ -87,6 +92,9 @@ class MockData {
       id: 'g3',
       name: 'Valli Cupe',
       location: 'Catanzaro, Calabria',
+      latitude: 39.3592,
+      longitude: 16.2263,
+
       imageUrl: 'https://images.unsplash.com/photo-1542224566-6e85f2e6772f',
       rating: 4.9,
       reviewCount: 256,
