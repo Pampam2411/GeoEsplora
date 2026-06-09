@@ -3,12 +3,12 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
+import 'package:geoesplora/viewmodels/geosite_list_viewmodel.dart';
 import 'package:geoesplora/views/geosite_list_view.dart';
 import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
 import 'package:geoesplora/widgets/sections/my_rocks_banner.dart';
 import 'package:geoesplora/widgets/inputs/filter_pills.dart';
 import 'package:geoesplora/widgets/cards/geosite_card.dart';
-import 'package:geoesplora/models/mock_data.dart';
 import 'package:geoesplora/widgets/texts/section_label.dart';
 import 'package:geoesplora/widgets/texts/title_page.dart';
 
@@ -24,7 +24,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    final geositi = MockData.mockGeosites;
+    final geositi = ref.watch(geositeListProvider);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -37,7 +37,15 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           const SizedBox(height: 20),
 
           //BARRA RICERCA
-          CustomSearchBar(),
+          CustomSearchBar(
+            onSearchSubmitted: (query) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const GeositeListView(),
+                ),
+              );
+            },
+          ),
 
           const SizedBox(height: 20),
           SectionLabel(text: "Le tue attività", fontSize: 10),

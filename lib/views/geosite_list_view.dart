@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geoesplora/models/mock_data.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
+import 'package:geoesplora/viewmodels/geosite_list_viewmodel.dart';
 import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
 import 'package:geoesplora/widgets/cards/geosite_card.dart';
 import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
@@ -13,7 +13,7 @@ class GeositeListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final geosites = MockData.mockGeosites;
+    final geosites = ref.watch(filteredGeositesProvider);
     final currentIndex = ref.watch(bottomNavIndexProvider);
 
     return Scaffold(

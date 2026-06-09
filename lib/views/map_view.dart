@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/map_viewmodel.dart';
+import 'package:geoesplora/views/geosite_list_view.dart';
 import 'package:geoesplora/widgets/cards/geosite_card.dart';
 import 'package:geoesplora/widgets/sections/geosite_map_preview.dart';
 import 'package:geoesplora/widgets/utils/fade_gradient.dart';
@@ -115,7 +116,15 @@ class _MapViewState extends ConsumerState<MapView> {
                 horizontal: 16.0,
                 vertical: 8.0,
               ),
-              child: CustomSearchBar(),
+              child: CustomSearchBar(
+                onSearchSubmitted: (query) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const GeositeListView(),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
 

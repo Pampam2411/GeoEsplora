@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
+import 'package:geoesplora/viewmodels/geosite_list_viewmodel.dart';
 import 'package:geoesplora/widgets/texts/section_label.dart';
 
-class CustomSearchBar extends StatefulWidget {
-  const CustomSearchBar({super.key});
-
+class CustomSearchBar extends ConsumerStatefulWidget {
+  final void Function(String)? onSearchSubmitted;
+  const CustomSearchBar({super.key, this.onSearchSubmitted});
   @override
-  State<CustomSearchBar> createState() => _CustomSearchBarState();
+  ConsumerState<CustomSearchBar> createState() => _CustomSearchBarState();
 }
 
-class _CustomSearchBarState extends State<CustomSearchBar> {
+class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
+  final TextEditingController _textController = TextEditingController();
   bool _isExpanded = false;
 
   final LayerLink _layerLink = LayerLink();
@@ -28,6 +31,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   void dispose() {
     _removeOverlay();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -49,7 +53,21 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   void _eseguiRicerca() {
     debugPrint("Ricerca avviata...");
+    final currentFilters = GeositeFilter(
+      tempoMassimo: _tempoDisponibile,
+      budgetBasso: _budgetBasso,
+      budgetMedio: _budgetMedio,
+      budgetAlto: _budgetAlto,
+      province: _distanzeSelezionate,
+      lunghezzaMassima: _lunghezzaPercorso,
+      soloAccessibili: _accessibilita,
+    );
+    ref.read(geositeFilterProvider.notifier).state = currentFilters;
     _toggleFilters();
+    FocusScope.of(context).unfocus();
+    if (widget.onSearchSubmitted != null) {
+      widget.onSearchSubmitted!(_textController.text);
+    }
   }
 
   void _toggleListItem(List<String> list, String item, bool? isChecked) {
@@ -135,6 +153,24 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         child: SizedBox(
           height: 42,
           child: TextField(
+            controller: _textController,
+            textInputAction: TextInputAction.search,
+            onChanged: (value) {
+              ref.read(searchQueryProvider.notifier).state = value;
+            },
+            onSubmitted: (value) {
+              if (_isExpanded) {
+                _toggleFilters();
+              }
+              FocusScope.of(context).unfocus();
+
+              ref.read(searchQueryProvider.notifier).state = value;
+              _textController.clear();
+
+              if (widget.onSearchSubmitted != null) {
+                widget.onSearchSubmitted!(value);
+              }
+            },
             decoration: InputDecoration(
               hintText: 'Cerca geosito...',
               hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(

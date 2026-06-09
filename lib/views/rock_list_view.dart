@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geoesplora/models/mock_data.dart';
+import 'package:geoesplora/views/geosite_list_view.dart';
 import 'package:geoesplora/widgets/inputs/custom_search_bar.dart';
 import 'package:geoesplora/widgets/cards/rock_card.dart';
 import 'package:geoesplora/widgets/texts/title_page.dart';
@@ -18,7 +19,15 @@ class RockListView extends StatelessWidget {
           TitlePage(title: "Le tue rocce"),
           const SizedBox(height: 20),
 
-          CustomSearchBar(),
+          CustomSearchBar(
+            onSearchSubmitted: (query) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const GeositeListView(),
+                ),
+              );
+            },
+          ),
 
           const SizedBox(height: 20),
 
