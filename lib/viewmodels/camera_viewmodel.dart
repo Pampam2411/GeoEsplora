@@ -7,6 +7,8 @@ class CameraViewModel extends ChangeNotifier {
   bool isInitialized = false;
 
   Future<void> initCamera() async {
+    if (isInitialized) return;
+
     try {
       cameras = await availableCameras();
       if (cameras != null && cameras!.isNotEmpty) {
@@ -22,6 +24,15 @@ class CameraViewModel extends ChangeNotifier {
       }
     } catch (e) {
       debugPrint("Errore inizializzazione fotocamera: $e");
+    }
+  }
+
+  Future<void> stopCamera() async {
+    if (controller != null) {
+      await controller!.dispose();
+      controller = null;
+      isInitialized = false;
+      notifyListeners();
     }
   }
 

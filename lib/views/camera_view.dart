@@ -1,32 +1,63 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import '../viewmodels/camera_viewmodel.dart';
 
-class CameraView extends StatefulWidget {
+class CameraView extends ConsumerStatefulWidget {
   const CameraView({super.key});
 
   @override
-  State<CameraView> createState() => _CameraViewState();
+  ConsumerState<CameraView> createState() => _CameraViewState();
 }
 
-class _CameraViewState extends State<CameraView> {
+class _CameraViewState extends ConsumerState<CameraView>
+    with WidgetsBindingObserver {
   late final CameraViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
     _viewModel = CameraViewModel();
-    _viewModel.initCamera();
+    WidgetsBinding.instance.addObserver(this);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (ref.read(bottomNavIndexProvider) == 2) {
+        _viewModel.initCamera();
+      }
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final currentIndex = ref.read(bottomNavIndexProvider);
+    if (currentIndex != 2) return;
+
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) {
+      _viewModel.stopCamera(); // Libera l'hardware
+    } else if (state == AppLifecycleState.resumed) {
+      _viewModel.initCamera(); // Riattiva l'hardware
+    }
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _viewModel.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<int>(bottomNavIndexProvider, (previous, next) {
+      if (next == 2) {
+        _viewModel.initCamera();
+      } else if (previous == 2 && next != 2) {
+        _viewModel.stopCamera();
+      }
+    });
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: AnimatedBuilder(
