@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:geoesplora/models/geosite.dart';
 import 'package:geoesplora/models/mock_data.dart';
+import 'package:geoesplora/viewmodels/location.viewmodel.dart';
+import 'package:latlong2/latlong.dart';
 
 class GeositeFilter {
   final double tempoMassimo;
@@ -37,10 +39,11 @@ final filteredGeositesProvider = Provider<List<Geosite>>((ref) {
   final allGeosites = ref.watch(geositeListProvider);
   final query = ref.watch(searchQueryProvider).trim().toLowerCase();
   final filters = ref.watch(geositeFilterProvider);
+  final userLocation = ref.watch(userLocationProvider);
 
   return allGeosites.where((geosite) {
     if (query.isNotEmpty && !geosite.name.toLowerCase().contains(query)) {
-      return false; // Se non contiene la parola cercata, lo scartiamo
+      return false;
     }
 
     if (filters.soloAccessibili && !geosite.isAccessible) {
@@ -49,16 +52,37 @@ final filteredGeositesProvider = Provider<List<Geosite>>((ref) {
 
     if (filters.province.isNotEmpty) {
       bool matchProvincia = false;
+      bool isVicino = false;
+
+      final provinciaGeosito = geosite.location
+          .split(',')
+          .first
+          .trim()
+          .toLowerCase();
+
       for (var prov in filters.province) {
         if (prov == 'Vicino a me') continue;
-
-        if (geosite.location.toLowerCase().contains(prov.toLowerCase())) {
+        if (provinciaGeosito == prov.toLowerCase()) {
           matchProvincia = true;
           break;
         }
       }
 
-      if (!matchProvincia && filters.province.any((p) => p != 'Vicino a me')) {
+      if (filters.province.contains('Vicino a me') && userLocation != null) {
+        // Calcoliamo la distanza in chilometri tra l'utente e il geosito
+        const distanceCalculator = Distance();
+        final double distanceInKm = distanceCalculator.as(
+          LengthUnit.Kilometer,
+          userLocation,
+          LatLng(geosite.latitude, geosite.longitude),
+        );
+
+        if (distanceInKm <= 50.0) {
+          isVicino = true;
+        }
+      }
+
+      if (!matchProvincia && !isVicino) {
         return false;
       }
     }

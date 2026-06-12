@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/geosite_list_viewmodel.dart';
+import 'package:geoesplora/viewmodels/location.viewmodel.dart';
 import 'package:geoesplora/widgets/texts/section_label.dart';
 
 class CustomSearchBar extends ConsumerStatefulWidget {
@@ -19,12 +20,12 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
 
-  double _tempoDisponibile = 30;
+  double _tempoDisponibile = 60;
   bool _budgetBasso = false;
   bool _budgetMedio = false;
   bool _budgetAlto = false;
   final List<String> _distanzeSelezionate = [];
-  double _lunghezzaPercorso = 15;
+  double _lunghezzaPercorso = 60;
   bool _accessibilita = false;
   final List<String> _categorieSelezionate = [];
 
@@ -53,6 +54,11 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
 
   void _eseguiRicerca() {
     debugPrint("Ricerca avviata...");
+
+    if (_distanzeSelezionate.contains('Vicino a me')) {
+      ref.read(userLocationProvider.notifier).fetchLocation();
+    }
+
     final currentFilters = GeositeFilter(
       tempoMassimo: _tempoDisponibile,
       budgetBasso: _budgetBasso,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:geoesplora/theme/app_color.dart';
 import 'package:geoesplora/viewmodels/bottom_nav_viewmodel.dart';
 import 'package:geoesplora/viewmodels/geosite_list_viewmodel.dart';
@@ -8,11 +9,34 @@ import 'package:geoesplora/widgets/cards/geosite_card.dart';
 import 'package:geoesplora/widgets/navigations/custom_bottom_nav.dart';
 import 'package:geoesplora/widgets/texts/title_page.dart';
 
-class GeositeListView extends ConsumerWidget {
+class GeositeListView extends ConsumerStatefulWidget {
   const GeositeListView({super.key});
+  @override
+  ConsumerState<GeositeListView> createState() => _GeositeListViewState();
+}
+
+class _GeositeListViewState extends ConsumerState<GeositeListView> {
+  late final StateController<String> _searchNotifier;
+  late final StateController<GeositeFilter> _filterNotifier;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    _searchNotifier = ref.read(searchQueryProvider.notifier);
+    _filterNotifier = ref.read(geositeFilterProvider.notifier);
+  }
+
+  @override
+  void dispose() {
+    Future.microtask(() {
+      _searchNotifier.state = '';
+      _filterNotifier.state = GeositeFilter();
+    });
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final geosites = ref.watch(filteredGeositesProvider);
     final currentIndex = ref.watch(bottomNavIndexProvider);
 
@@ -54,6 +78,9 @@ class GeositeListView extends ConsumerWidget {
       bottomNavigationBar: CustomBottomNav(
         currentIndex: currentIndex,
         onTap: (index) {
+          ref.invalidate(searchQueryProvider);
+          ref.invalidate(filteredGeositesProvider);
+
           ref.read(bottomNavIndexProvider.notifier).changePage(index);
           Navigator.of(context).popUntil((route) => route.isFirst);
         },
